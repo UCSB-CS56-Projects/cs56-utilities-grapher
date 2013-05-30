@@ -15,6 +15,10 @@ public class GrapherApplication {
 	JFrame appFrame = new JFrame(TITLE);
 	appFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	appFrame.setSize(WIDTH, HEIGHT);
+
+	Graph2DPanel graphPanel = new Graph2DPanel(new SineFunction());
+	appFrame.getContentPane().add(graphPanel);
+
 	appFrame.setVisible(true);
     }
 
