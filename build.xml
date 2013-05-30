@@ -1,6 +1,7 @@
 <project default="compile">
   <!-- build.xml for grapher utility, CS56, Spring 2013
-       name: Ryan Halbrook -->
+       name: Ryan Halbrook
+  -->
 
   <property environment="env"/> <!-- load environment variables -->
 
@@ -19,6 +20,8 @@
     <pathelement location="build"/>
   </path>
 
+
+<!-- TARGET -->
   <target name="compile" description="Compiles the graphing utility">
     <mkdir dir="build" />
     <javac srcdir="src" destdir="build" debug="true" debuglevel="lines,source" includeantruntime="false">
@@ -26,8 +29,29 @@
     </javac>
   </target>
 
+
+<!-- TARGET -->
+<target name="javadoc" description="Creates the javadoc" depends="compile">
+
+  <delete dir="javadoc" quiet="true" /> <!-- delete the old javadoc files -->
+
+  <javadoc destdir="javadoc" author="true" version="true" use="true">
+    <fileset dir="src" includes="**/*.java"/>
+  </javadoc>
+
+</target>
+
+
+<!-- TARGET -->
   <target name="run" description="Runs the graphing utility" depends="compile">
     <java classname="${mainClass}" classpath="build" fork="true" />
+  </target>
+
+
+<!-- TARGET -->
+  <target name="clean" description="Removes build and javadoc directories">
+    <delete dir="build" />
+    <delete dir="javadoc" />
   </target>
 
 </project>
