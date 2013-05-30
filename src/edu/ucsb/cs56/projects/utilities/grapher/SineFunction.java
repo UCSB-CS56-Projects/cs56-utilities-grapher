@@ -5,6 +5,7 @@
    @version CS56, Spring 2013, Project
  */
 public class SineFunction implements FunctionR1R1 {
+
     public double evaluate(double indVar) {
 	return Math.sin(indVar);
     }

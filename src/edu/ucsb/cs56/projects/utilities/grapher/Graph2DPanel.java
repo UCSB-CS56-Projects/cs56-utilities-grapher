@@ -15,8 +15,8 @@ public class Graph2DPanel extends JPanel {
     // A path of the graph that can be drawn
     private GeneralPath graph = null;
 
-    private double xScale = 10.0;
-    private double yScale = 10.0;
+    private float xScale = 10.0f;
+    private float yScale = 10.0f;
 
     public Graph2DPanel(FunctionR1R1 function) {
 	super();
@@ -29,7 +29,7 @@ public class Graph2DPanel extends JPanel {
 	double height = this.getSize().getHeight();
 	AffineTransform at = new AffineTransform();
 	at.translate(0, height / 2);
-	at.scale(xScale, yScale);
+	//at.scale(xScale, yScale);
 	
 	g2.draw(graph.createTransformedShape(at));
     }
@@ -41,14 +41,14 @@ public class Graph2DPanel extends JPanel {
 	double pX = 0;
 	double pY = 0;
 
-	int evals = (int)(this.getSize().getWidth() * xScale);
+	float evals = (float)(this.getSize().getWidth() * xScale);
 
-	pX = 1;
-	pY = function.evaluate(pX);
+	pX = 0;
+	pY = function.evaluate(pX) * yScale;
 	gp.moveTo(pX, pY);
-	for (int i = 2; i < evals; i++) {
-	    pX = i;
-	    pY = function.evaluate(i);
+	for (float i = (1/xScale); i < evals; i+=(1 / xScale)) {
+	    pX = i * xScale;
+	    pY =  -(function.evaluate(i) * yScale);
 	    gp.lineTo(pX, pY);
 	}
 	graph = gp;
