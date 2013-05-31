@@ -57,8 +57,8 @@ public class Graph2DPanel extends JPanel implements ActionListener {
     public void paintComponent(Graphics g) {
 	Graphics2D g2 = (Graphics2D)g; // Cast for more features.
 	g2.setColor(Color.WHITE);
-	g2.fillRect(0, 0, ((int)this.getSize().getWidth()-1),
-		    (int)(this.getSize().getHeight()-1));
+	g2.fillRect(0, 0, ((int)this.getSize().getWidth()),
+		    (int)(this.getSize().getHeight()));
 	g2.setColor(Color.BLACK);
 	drawAxes(g2);
 

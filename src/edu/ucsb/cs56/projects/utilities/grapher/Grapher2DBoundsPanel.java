@@ -46,17 +46,6 @@ public class Grapher2DBoundsPanel extends JPanel implements ActionListener {
     }
 
     /**
-        Updates the bounds  object to reflect the values
-	in the widget's fields.
-     */
-    private void updateBounds() {
-	bounds.setXMin(new Float(xMinField.getText()));
-	bounds.setYMin(new Float(yMinField.getText()));
-	bounds.setXMax(new Float(xMaxField.getText()));
-	bounds.setYMax(new Float(yMaxField.getText()));
-    }
-
-    /**
        Call back for the event that the bounds have changed.
      */
     public void actionPerformed(ActionEvent e) {
@@ -74,7 +63,15 @@ public class Grapher2DBoundsPanel extends JPanel implements ActionListener {
 	/** Call back for when a value in a text field is changed. 
 	 @param e the event object */
 	public void actionPerformed(ActionEvent e) {
-	    updateBounds();
+	    if (e.getSource() == xMinField) {
+		bounds.setXMin(new Float(xMinField.getText()));
+	    } else if (e.getSource() == yMinField) {
+		bounds.setYMin(new Float(yMinField.getText()));
+	    } else if (e.getSource() == xMaxField) {
+		bounds.setXMax(new Float(xMaxField.getText()));
+	    } else {
+		bounds.setYMax(new Float(yMaxField.getText()));
+	    }
 	}
     }
     
