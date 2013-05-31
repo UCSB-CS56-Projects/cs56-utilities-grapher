@@ -1,6 +1,7 @@
 <project default="compile">
   <!-- build.xml for grapher utility, CS56, Spring 2013
        name: Ryan Halbrook
+       version: CS56, S13, Project
   -->
 
   <property environment="env"/> <!-- load environment variables -->
