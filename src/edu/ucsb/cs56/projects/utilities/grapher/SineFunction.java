@@ -6,6 +6,11 @@
  */
 public class SineFunction implements FunctionR1R1 {
 
+    /**
+       Evaluate the function
+       @param indVar the independent variable.
+       @return the value of the function.
+     */
     public double evaluate(double indVar) {
 	return Math.sin(indVar);
     }

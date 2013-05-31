@@ -2,6 +2,7 @@
   <!-- build.xml for grapher utility, CS56, Spring 2013
        name: Ryan Halbrook
        version: CS56, S13, Project
+       sources:  CS56 Wiki (homepage = https://foo.cs.ucsb.edu/56wiki/index.php/Main_Page)
   -->
 
   <property environment="env"/> <!-- load environment variables -->

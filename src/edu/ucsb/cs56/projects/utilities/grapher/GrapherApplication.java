@@ -16,6 +16,9 @@ public class GrapherApplication {
     public Bounds2DFloat b = null;
     public Graph2DPanel graphPanel = null;
 
+    /**
+       Start the Grapher Application. 
+     */
     public void start() {
 	JFrame appFrame = new JFrame(TITLE);
 	appFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -30,13 +33,18 @@ public class GrapherApplication {
 	appFrame.setVisible(true);
     }
 
-    public GrapherApplication() {}
-
+    /**
+       Main that created the grapher application and starts it.
+       @param args not used.
+     */
     public static void main(String [] args) {
 	GrapherApplication application = new GrapherApplication();
 	application.start();
     }
 
+    /**
+       Build the menu bar object for the grapher application.
+     */
     public void buildMenuBar() {
 	mb = new JMenuBar();
 	JMenu scale = new JMenu("Scale");
@@ -51,9 +59,13 @@ public class GrapherApplication {
 	mb.add(scale);
     }
 
+    /**
+       Listener for when a scale button is pressed.
+     */
     public class ScaleButtonListener implements ActionListener {
+	/** Callback for when a scale button is pressed.
+	    @param e the event object */
 	public void actionPerformed(ActionEvent e) {
-	    //System.out.println("Action performed");
 	    if (e.getActionCommand().equals("s2times")) {
 		b.scale(2.0f);
 		graphPanel.refresh();

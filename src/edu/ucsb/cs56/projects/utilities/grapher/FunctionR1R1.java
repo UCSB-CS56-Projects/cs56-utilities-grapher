@@ -5,5 +5,10 @@
    @version CS56, Spring 2013, Grapher Utility Project
  */
 public interface FunctionR1R1 {
+    /**
+       Evaluate the function.
+       @param indVar the independent variable.
+       @return the value of the function evaluated with the independent variable.
+     */
     public double evaluate(double indVar);
 }

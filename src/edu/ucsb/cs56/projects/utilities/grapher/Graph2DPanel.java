@@ -20,8 +20,15 @@ public class Graph2DPanel extends JPanel implements ActionListener {
     private float xScale = 10.0f;
     private float yScale = 10.0f;
 
-    private boolean debug = true;
+    private boolean debug = false;
 
+    /**
+       Constructs a new object that will graph the supplied function
+       within the given bounds on the function. When the function is
+       redrawn it will use this same object.
+       @param function the function to graph.
+       @param b the rectangular boundary that determines how much of the graph will be shown.
+     */
     public Graph2DPanel(FunctionR1R1 function, Bounds2DFloat b) {
 	super();
 	this.function = function;
@@ -32,11 +39,21 @@ public class Graph2DPanel extends JPanel implements ActionListener {
 	this.bounds.addActionListener(this);
     }
 
+    /**
+       Tell the graph to redraw itself, usually because the
+       rendering information, such as the bounds has changed.
+     */
     public void refresh() {
 	graphIsValid = false;
 	repaint();
     }
 
+    /**
+       Paints the component onscreen. Only re-renders from scratch if
+       graphIsValid is false. This should not be called directly. 
+       Use repaint().
+       @param g the graphics object which will perform onscreen drawing.
+     */
     public void paintComponent(Graphics g) {
 	Graphics2D g2 = (Graphics2D)g; // Cast for more features.
 	g2.setColor(Color.WHITE);
@@ -49,11 +66,14 @@ public class Graph2DPanel extends JPanel implements ActionListener {
 	double height = this.getSize().getHeight();
 	AffineTransform at = new AffineTransform();
 	at.translate(0, height / 2);
-	//at.scale(xScale, yScale);
 	
 	g2.draw(graph.createTransformedShape(at));
     }
 
+    /**
+       Draws a set of axes with the the graphics object g.
+       @param g the destination for drawing.
+     */
     private void drawAxes(Graphics g) {
         float width = (float)this.getSize().getWidth();
 	float height = (float)this.getSize().getHeight();
@@ -65,6 +85,9 @@ public class Graph2DPanel extends JPanel implements ActionListener {
 	g.drawLine(0, 0, 0, (int)width);
     }
 
+    /**
+       Created the path for the graph.
+     */
     private void updateGraph() {
 	GeneralPath gp = new GeneralPath();
 
@@ -78,7 +101,6 @@ public class Graph2DPanel extends JPanel implements ActionListener {
 	
 	this.xScale = (float)(this.getSize().getWidth()) / (bounds.getXMax() - bounds.getXMin());
 	this.yScale = (float)(this.getSize().getHeight()) / (bounds.getYMax() - bounds.getYMin());
-	System.out.println(xScale);
 	float lastX = (float)(this.getSize().getWidth() / xScale);
 
 	pX = 0;
@@ -95,9 +117,12 @@ public class Graph2DPanel extends JPanel implements ActionListener {
 	graph = gp;
     }
 
+    /**
+       Call back for the event that the bounds are changed.
+       @param e the ActionEvent object.
+     */
     public void actionPerformed(ActionEvent e) {
 	this.refresh();
-	System.out.println("Graph Panel: bounds changed");
     }
 
 }
