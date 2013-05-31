@@ -40,6 +40,19 @@
     <fileset dir="src" includes="**/*.java"/>
   </javadoc>
 
+  <!-- deployment of the javadoc -->
+  <copy todir="${javadocDest}" >
+    <fileset dir="javadoc"/>
+  </copy>
+
+  <!-- change file permissions -->
+  <!-- folders -->
+  <chmod dir="${javadocDest}" perm="755" type="dir" includes="**"/>
+  <!-- files -->
+  <chmod dir="${javadocDest}" perm="755" type="file" includes="**/*"/>
+
+  <echo>Javadoc deployed to ${javadocURL}</echo>
+
 </target>
 
 
