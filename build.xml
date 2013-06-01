@@ -20,6 +20,7 @@
 
   <path id="project.class.path">
     <pathelement location="build"/>
+    <pathelement location="lib"/>
   </path>
 
 
