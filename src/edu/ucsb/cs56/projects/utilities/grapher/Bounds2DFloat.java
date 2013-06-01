@@ -42,6 +42,19 @@ public class Bounds2DFloat {
     }
 
     /**
+       Translates the bounds
+       @param x the number of units to translate the bounds in the x direction.
+       @param y the number of untis to translate the bounds in the y direction.
+    */
+    public void translate(int x, int y) {
+	xMin += x;
+	xMax += x;
+	yMin += y;
+	yMax += y;
+	sendEvents();
+    }
+
+    /**
        Constructs a new object with the given values.
        @param xMin the lower boundary on the x coordinate.
        @param yMin the lower boundary on the y coordinate.

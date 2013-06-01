@@ -12,6 +12,9 @@ public class Graph2DPanel extends JPanel implements ActionListener {
     private FunctionR1R1 function = null;
     private Bounds2DFloat bounds;
 
+    private Color background = Color.BLACK;
+    private Color foreground = Color.WHITE;
+    
     // Used to only redraw the graph if necessary.
     private boolean graphIsValid = false;
     // A path of the graph that can be drawn
@@ -20,7 +23,7 @@ public class Graph2DPanel extends JPanel implements ActionListener {
     private float xScale = 10.0f;
     private float yScale = 10.0f;
 
-    private boolean debug = false;
+    private boolean debug = true;
 
     /**
        Constructs a new object that will graph the supplied function
@@ -56,16 +59,16 @@ public class Graph2DPanel extends JPanel implements ActionListener {
      */
     public void paintComponent(Graphics g) {
 	Graphics2D g2 = (Graphics2D)g; // Cast for more features.
-	g2.setColor(Color.WHITE);
+	g2.setColor(background);
 	g2.fillRect(0, 0, ((int)this.getSize().getWidth()),
 		    (int)(this.getSize().getHeight()));
-	g2.setColor(Color.BLACK);
+	g2.setColor(foreground);
 	drawAxes(g2);
 
 	if (graph == null || !graphIsValid) updateGraph();
 	double height = this.getSize().getHeight();
 	AffineTransform at = new AffineTransform();
-	at.translate(0, height / 2);
+	at.translate(0, (height / 2));
 	
 	g2.draw(graph.createTransformedShape(at));
     }
@@ -75,12 +78,14 @@ public class Graph2DPanel extends JPanel implements ActionListener {
        @param g the destination for drawing.
      */
     private void drawAxes(Graphics g) {
+	
         float width = (float)this.getSize().getWidth();
 	float height = (float)this.getSize().getHeight();
 
+	
 	// Draw the x axis
 	g.drawLine(0, (int)(height / 2), (int)width, (int)(height / 2));
-
+	
 	// Draw the y axis
 	g.drawLine(0, 0, 0, (int)width);
     }
@@ -91,25 +96,22 @@ public class Graph2DPanel extends JPanel implements ActionListener {
     private void updateGraph() {
 	GeneralPath gp = new GeneralPath();
 
-	// store old points to "connect" from.
 	double pX = 0;
 	double pY = 0;
 	
 	int ptsCount = 0;
-
-	
 	
 	this.xScale = (float)(this.getSize().getWidth()) / (bounds.getXMax() - bounds.getXMin());
 	this.yScale = (float)(this.getSize().getHeight()) / (bounds.getYMax() - bounds.getYMin());
 	float lastX = (float)(this.getSize().getWidth() / xScale);
 
 	pX = 0;
-	pY = function.evaluate(pX) * yScale;
+	pY = function.evaluate(pX+bounds.getXMin()) * yScale;
 	ptsCount++;
 	gp.moveTo(pX, pY);
 	for (float i = (1/xScale); i < lastX; i+=(1 / xScale)) {
 	    pX = i * xScale;
-	    pY =  -(function.evaluate(i) * yScale);
+	    pY =  -(function.evaluate(i+bounds.getXMin()) * yScale);
 	    ptsCount++;
 	    gp.lineTo(pX, pY);
 	}

@@ -14,4 +14,14 @@ public class SineFunction implements FunctionR1R1 {
     public double evaluate(double indVar) {
 	return Math.sin(indVar);
     }
+
+    /**
+       Check if a number is within the domain of this function.
+       In this case, any number is within the domain of the function.
+       @param arg the value to check
+       @return true if the value is within the domain of the function.
+     */
+    public boolean isInDomain(double arg) {
+	return true;
+    }
 }

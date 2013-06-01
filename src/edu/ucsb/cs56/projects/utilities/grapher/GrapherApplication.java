@@ -52,18 +52,26 @@ public class GrapherApplication {
 	JMenuItem scaleHalf = new JMenuItem("Scale x1/2");
 	scaleTimesTwo.setActionCommand("s2times");
 	scaleHalf.setActionCommand("s0.5times");
-	scaleTimesTwo.addActionListener(new ScaleButtonListener());
-	scaleHalf.addActionListener(new ScaleButtonListener());
+	scaleTimesTwo.addActionListener(new ButtonListener());
+	scaleHalf.addActionListener(new ButtonListener());
 	scale.add(scaleTimesTwo);
 	scale.add(scaleHalf);
+
+	JMenu translate = new JMenu("Translate");
+	JMenuItem translateFive = new JMenuItem ("Right 5 Units");
+	translateFive.setActionCommand("translateX5");
+	translateFive.addActionListener(new ButtonListener());
+	translate.add(translateFive);
+
 	mb.add(scale);
+	mb.add(translate);
     }
 
     /**
-       Listener for when a scale button is pressed.
+       Listener for when a button is pressed.
      */
-    public class ScaleButtonListener implements ActionListener {
-	/** Callback for when a scale button is pressed.
+    public class ButtonListener implements ActionListener {
+	/** Callback for when a button is pressed.
 	    @param e the event object */
 	public void actionPerformed(ActionEvent e) {
 	    if (e.getActionCommand().equals("s2times")) {
@@ -71,6 +79,9 @@ public class GrapherApplication {
 		graphPanel.refresh();
 	    } else if (e.getActionCommand().equals("s0.5times")) {
 		b.scale(0.5f);
+		graphPanel.refresh();
+	    } else if (e.getActionCommand().equals("translateX5")) {
+		b.translate(5, 0);
 		graphPanel.refresh();
 	    }
 	}
