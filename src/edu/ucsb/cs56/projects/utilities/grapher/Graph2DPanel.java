@@ -1,3 +1,4 @@
+package edu.ucsb.cs56.projects.utilities.grapher;
 import javax.swing.*; // JPanel
 import java.awt.*; // Graphics, Graphics2D
 import java.awt.geom.*; // GeneralPath

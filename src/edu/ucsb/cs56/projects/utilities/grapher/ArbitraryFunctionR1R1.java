@@ -1,4 +1,4 @@
-
+package edu.ucsb.cs56.projects.utilities.grapher;
 /**
    A class that represents an arbitrary function that is given by a String.
    @author Ryan Halbrook

@@ -20,7 +20,7 @@
 
   <path id="project.class.path">
     <pathelement location="build"/>
-    <pathelement location="lib"/>
+    <pathelement location="lib/junit-4.8.2.jar"/>
   </path>
 
 
@@ -63,6 +63,18 @@
     <java classname="${mainClass}" classpath="build" fork="true" />
   </target>
 
+<!-- TARGET -->
+<target name="test" depends="compile" description="Test the arbitrary function capabilities">
+  <junit haltonerror="no" haltonfailure="no">
+    <classpath refid="project.class.path"/>
+    <batchtest fork="yes">
+      <fileset dir="src">
+	<include name="**/*Test.java"/>
+      </fileset>
+    </batchtest>
+    <formatter type="plain" usefile="false" />
+  </junit>
+</target>
 
 <!-- TARGET -->
   <target name="clean" description="Removes build and javadoc directories">

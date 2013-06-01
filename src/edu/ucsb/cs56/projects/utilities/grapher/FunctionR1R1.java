@@ -1,3 +1,4 @@
+package edu.ucsb.cs56.projects.utilities.grapher;
 /**
    An interface for a class that represents a function of domain and range that
    are subsets of R1, where R1 is the set of real numbers.

@@ -1,3 +1,4 @@
+package edu.ucsb.cs56.projects.utilities.grapher;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;

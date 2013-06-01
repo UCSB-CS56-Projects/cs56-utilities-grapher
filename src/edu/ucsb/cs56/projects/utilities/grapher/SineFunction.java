@@ -1,3 +1,4 @@
+package edu.ucsb.cs56.projects.utilities.grapher;
 /**
    A class that wraps up the sine function as an implementer of
    the FunctionR1R1 interface.
