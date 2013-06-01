@@ -10,7 +10,7 @@
   <property name="course" value="cs56" />
   <property name="quarter" value="13S" />
   <property name="projectName" value="cs56-utilities-grapher" />
-  <property name="mainClass" value="GrapherApplication" />
+  <property name="mainClass" value="edu.ucsb.cs56.projects.utilities.grapher.GrapherApplication" />
 
   <!-- for javadoc deployment -->
   <property name="webRoot" value="${env.HOME}/public_html/cs56" />

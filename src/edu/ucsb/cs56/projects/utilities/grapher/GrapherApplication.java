@@ -11,8 +11,8 @@ import java.awt.*;
 public class GrapherApplication {
 
     public static final String TITLE = "2D Function Grapher";
-    public static final int WIDTH = 500;
-    public static final int HEIGHT = 350;
+    public static final int WIDTH = 750;
+    public static final int HEIGHT = 550;
     public JMenuBar mb = null;
     public Bounds2DFloat b = null;
     public Graph2DPanel graphPanel = null;

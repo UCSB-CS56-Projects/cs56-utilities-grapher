@@ -3,14 +3,17 @@ import javax.swing.*; // JPanel
 import java.awt.*; // Graphics, Graphics2D
 import java.awt.geom.*; // GeneralPath
 import java.awt.event.*;
- 
+import java.util.ArrayList;
+
 /**
    A JPanel subclass that draws a function to the screen.
    @author Ryan Halbrook
    @version CS56, Spring 2013
  */
 public class Graph2DPanel extends JPanel implements ActionListener {
-    private FunctionR1R1 function = null;
+    private ArrayList<FunctionR1R1DisplayData> functions
+	= new ArrayList<FunctionR1R1DisplayData>();
+
     private Bounds2DFloat bounds;
 
     private Color background = Color.BLACK;
@@ -35,7 +38,7 @@ public class Graph2DPanel extends JPanel implements ActionListener {
      */
     public Graph2DPanel(FunctionR1R1 function, Bounds2DFloat b) {
 	super();
-	this.function = function;
+	functions.add(new FunctionR1R1DisplayData(function, Color.GREEN));
 	this.bounds = b;
 	if(this.bounds == null) {
 	    this.bounds = new Bounds2DFloat();
@@ -65,24 +68,27 @@ public class Graph2DPanel extends JPanel implements ActionListener {
 		    (int)(this.getSize().getHeight()));
 	g2.setColor(foreground);
 	drawAxes(g2);
-
-	if (graph == null || !graphIsValid) updateGraph();
-	double height = this.getSize().getHeight();
-	AffineTransform at = new AffineTransform();
-	at.translate(0, (height / 2));
 	
-	g2.draw(graph.createTransformedShape(at));
+	if (!graphIsValid) updatePaths();
+	for (FunctionR1R1DisplayData fdd : functions) {
+	   
+	    double height = this.getSize().getHeight();
+	    AffineTransform at = new AffineTransform();
+	    at.translate(0, (height / 2));
+	
+	    g2.setColor(fdd.getColor());
+	    g2.draw(fdd.getPath().createTransformedShape(at));
+	}
     }
 
     /**
-       Draws a set of axes with the the graphics object g.
+       Draws a set of axes with the graphics object g.
        @param g the destination for drawing.
      */
     private void drawAxes(Graphics g) {
 	
         float width = (float)this.getSize().getWidth();
 	float height = (float)this.getSize().getHeight();
-
 	
 	// Draw the x axis
 	g.drawLine(0, (int)(height / 2), (int)width, (int)(height / 2));
@@ -92,32 +98,16 @@ public class Graph2DPanel extends JPanel implements ActionListener {
     }
 
     /**
-       Created the path for the graph.
+       Updates the paths representing each graph.
      */
-    private void updateGraph() {
-	GeneralPath gp = new GeneralPath();
-
-	double pX = 0;
-	double pY = 0;
-	
-	int ptsCount = 0;
-	
-	this.xScale = (float)(this.getSize().getWidth()) / (bounds.getXMax() - bounds.getXMin());
-	this.yScale = (float)(this.getSize().getHeight()) / (bounds.getYMax() - bounds.getYMin());
-	float lastX = (float)(this.getSize().getWidth() / xScale);
-
-	pX = 0;
-	pY = function.evaluate(pX+bounds.getXMin()) * yScale;
-	ptsCount++;
-	gp.moveTo(pX, pY);
-	for (float i = (1/xScale); i < lastX; i+=(1 / xScale)) {
-	    pX = i * xScale;
-	    pY =  -(function.evaluate(i+bounds.getXMin()) * yScale);
-	    ptsCount++;
-	    gp.lineTo(pX, pY);
+    private void updatePaths() {
+	double width = this.getSize().getWidth();
+	double height = this.getSize().getHeight();
+	int i = 0;
+	for (FunctionR1R1DisplayData fdd : functions) {
+	    fdd.buildPath(bounds, width, height);
+	    i++;
 	}
-	if (debug) System.out.println("Points rendered: " + ptsCount);
-	graph = gp;
     }
 
     /**
