@@ -11,7 +11,7 @@ import java.awt.*;
 public class GrapherApplication {
 
     public static final String TITLE = "2D Function Grapher";
-    public static final int WIDTH = 750;
+    public static final int WIDTH = 1000;
     public static final int HEIGHT = 550;
     public JMenuBar mb = null;
     public Bounds2DFloat b = null;
@@ -29,6 +29,7 @@ public class GrapherApplication {
 	graphPanel = new Graph2DPanel(new SineFunction(),b);
 	appFrame.getContentPane().add(graphPanel);
 	appFrame.getContentPane().add(new Grapher2DBoundsPanel(b), BorderLayout.SOUTH);
+	appFrame.getContentPane().add(new FunctionsPanel(), BorderLayout.EAST);
 	buildMenuBar();
 	appFrame.setJMenuBar(mb);
 	appFrame.setVisible(true);
