@@ -14,12 +14,7 @@ public class FunctionsPanel extends JPanel {
     public FunctionsPanel(FunctionR1R1DisplayDataList list) {
 	super();
 	this.list = list;
-	/*
-	TableModel data = new AbstractTableModel() {
-		
-	   
-        };
-	*/
+
 	JTable t = new JTable(new TableData(list));
 	TableColumn c = null;
 	for (int i = 0; i < t.getColumnCount(); i++) {
@@ -30,7 +25,6 @@ public class FunctionsPanel extends JPanel {
 	this.setPreferredSize(new Dimension(230, 400));
 	t.setBackground(Color.GRAY);
 	JScrollPane sp = new JScrollPane(t);
-	//sp.setPreferredWidth(200);
 	sp.setPreferredSize(new Dimension(200,400));
 	this.add(sp);
     }
@@ -43,14 +37,14 @@ public class FunctionsPanel extends JPanel {
 	}
 	public int getColumnCount() { return 2; }
 	public int getRowCount() { return list.size(); }
-		public Object getValueAt(int row, int col) {
-		    if (col == 0) {
-			int num = row+1;
-			return new String("f" + num);
-		    } else if (col == 1) {
-			return list.get(row).getFunction().toString();
-		    }
-		    return new Integer(row);
-		}
+	public Object getValueAt(int row, int col) {
+	    if (col == 0) {
+		int num = row+1;
+		return new String("f" + num);
+	    } else if (col == 1) {
+		return list.get(row).getFunction().toString();
+	    }
+	    return new Integer(row);
+	}
     }
 }

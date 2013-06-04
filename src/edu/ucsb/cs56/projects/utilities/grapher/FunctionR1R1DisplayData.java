@@ -33,14 +33,14 @@ public class FunctionR1R1DisplayData {
 	pX = 0;
 	pY = function.evaluate(pX+bounds.getXMin()) * yScale;
 	ptsCount++;
-	gp.moveTo(pX, pY);
-	for (float i = (1/xScale); i < lastX; i+=(1 / xScale)) {
+	gp.moveTo(pX, pY+bounds.getYMin());
+	for (float i = 0; i < lastX; i+=(1 / xScale)) {
 	    pX = i * xScale;
 	    pY =  -(function.evaluate(i+bounds.getXMin()) * yScale);
 	    ptsCount++;
-	    gp.lineTo(pX, pY);
+	    gp.lineTo(pX, pY+bounds.getYMin());
 	}
-	System.out.println("Points rendered: " + ptsCount);
+	//System.out.println("Points rendered: " + ptsCount);
 	this.gp = gp;
     }
 

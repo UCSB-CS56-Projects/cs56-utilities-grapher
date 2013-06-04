@@ -94,10 +94,12 @@ public class Graph2DPanel extends JPanel implements ActionListener {
 	float height = (float)this.getSize().getHeight();
 	
 	// Draw the x axis
-	g.drawLine(0, (int)(height / 2), (int)width, (int)(height / 2));
+	g.drawLine(0, (int)(height / 2)+ (int)bounds.getYMin(), (int)width, (int)(height / 2)+(int)bounds.getYMin());
 	
 	// Draw the y axis
-	g.drawLine(0, 0, 0, (int)width);
+	/*
+	g.drawLine(-(int)(width / 2 + (int)bounds.getXMin()), 0, (int)-(width / 2 + (int)bounds.getXMin()), (int)width);
+	*/
     }
 
     /**

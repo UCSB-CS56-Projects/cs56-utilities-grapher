@@ -55,8 +55,8 @@ public class GrapherApplication {
     public void buildMenuBar() {
 	mb = new JMenuBar();
 	JMenu scale = new JMenu("Scale");
-	JMenuItem scaleTimesTwo = new JMenuItem("Scale x2");
-	JMenuItem scaleHalf = new JMenuItem("Scale x1/2");
+	JMenuItem scaleTimesTwo = new JMenuItem("x2");
+	JMenuItem scaleHalf = new JMenuItem("x0.5");
 	scaleTimesTwo.setActionCommand("s2times");
 	scaleHalf.setActionCommand("s0.5times");
 	scaleTimesTwo.addActionListener(new ButtonListener());
@@ -65,10 +65,25 @@ public class GrapherApplication {
 	scale.add(scaleHalf);
 
 	JMenu translate = new JMenu("Translate");
-	JMenuItem translateFive = new JMenuItem ("Right 5 Units");
+	JMenuItem translateFive = new JMenuItem ("Right 5");
+	JMenuItem translateFiveUp = new JMenuItem("Up 5");
+	JMenuItem translateFiveLeft = new JMenuItem("Left 5");
+	JMenuItem translateFiveDown = new JMenuItem("Down 5");
+
 	translateFive.setActionCommand("translateX5");
+	translateFiveUp.setActionCommand("translateY5");
+	translateFiveLeft.setActionCommand("translateX-5");
+	translateFiveDown.setActionCommand("translateY-5");
+
 	translateFive.addActionListener(new ButtonListener());
+	translateFiveUp.addActionListener(new ButtonListener());
+	translateFiveLeft.addActionListener(new ButtonListener());
+	translateFiveDown.addActionListener(new ButtonListener());
+
 	translate.add(translateFive);
+	translate.add(translateFiveUp);
+	translate.add(translateFiveLeft);
+	translate.add(translateFiveDown);
 
 	mb.add(scale);
 	mb.add(translate);
@@ -89,6 +104,15 @@ public class GrapherApplication {
 		graphPanel.refresh();
 	    } else if (e.getActionCommand().equals("translateX5")) {
 		b.translate(5, 0);
+		graphPanel.refresh();
+	    } else if (e.getActionCommand().equals("translateY5")) {
+		b.translate(0, 5);
+		graphPanel.refresh();
+	    } else if (e.getActionCommand().equals("translateY-5")) {
+		b.translate(0,-5);
+		graphPanel.refresh();
+	    } else if (e.getActionCommand().equals("translateX-5")) {
+		b.translate(-5,0);
 		graphPanel.refresh();
 	    }
 	}
