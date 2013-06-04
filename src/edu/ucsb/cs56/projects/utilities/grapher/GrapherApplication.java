@@ -16,6 +16,7 @@ public class GrapherApplication {
     public JMenuBar mb = null;
     public Bounds2DFloat b = null;
     public Graph2DPanel graphPanel = null;
+    private FunctionR1R1DisplayDataList fnsdd = new FunctionR1R1DisplayDataList();
 
     /**
        Start the Grapher Application. 
@@ -26,10 +27,14 @@ public class GrapherApplication {
 	appFrame.setSize(WIDTH, HEIGHT);
 	
 	b = new Bounds2DFloat(0, -1, (float)(Math.PI * 2), 1);
-	graphPanel = new Graph2DPanel(new SineFunction(),b);
+	fnsdd.add(new FunctionR1R1DisplayData(new SineFunction(), Color.GREEN));
+	fnsdd.add(new FunctionR1R1DisplayData(new CosineFunction(), Color.BLUE));
+	fnsdd.add(new FunctionR1R1DisplayData(new QuadraticFunction(), Color.RED));
+
+	graphPanel = new Graph2DPanel(new SineFunction(),b, fnsdd);
 	appFrame.getContentPane().add(graphPanel);
 	appFrame.getContentPane().add(new Grapher2DBoundsPanel(b), BorderLayout.SOUTH);
-	appFrame.getContentPane().add(new FunctionsPanel(), BorderLayout.EAST);
+	appFrame.getContentPane().add(new FunctionsPanel(fnsdd), BorderLayout.EAST);
 	buildMenuBar();
 	appFrame.setJMenuBar(mb);
 	appFrame.setVisible(true);

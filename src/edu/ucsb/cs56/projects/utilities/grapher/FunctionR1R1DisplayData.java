@@ -2,6 +2,11 @@ package edu.ucsb.cs56.projects.utilities.grapher;
 import java.awt.Color;
 import java.awt.geom.*;
 
+/**
+   @author Ryan Halbrook
+   @version CS56, Spring 13, Project
+ */
+
 public class FunctionR1R1DisplayData {
     private Color graphColor;
     private boolean isVisible = true;
@@ -42,6 +47,7 @@ public class FunctionR1R1DisplayData {
     // ---- Setters and Getters ---- //
 
     public GeneralPath getPath() {
+	
 	return this.gp;
     }
 

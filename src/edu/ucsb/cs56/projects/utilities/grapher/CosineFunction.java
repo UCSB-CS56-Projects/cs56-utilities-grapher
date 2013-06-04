@@ -1,11 +1,11 @@
 package edu.ucsb.cs56.projects.utilities.grapher;
 /**
-   A class that wraps up the sine function as an implementer of
+   A class that wraps up the cosine function as an implementer of
    the FunctionR1R1 interface.
    @author Ryan Halbrook
    @version CS56, Spring 2013, Project
  */
-public class SineFunction implements FunctionR1R1 {
+public class CosineFunction implements FunctionR1R1 {
 
     /**
        Evaluate the function
@@ -13,7 +13,7 @@ public class SineFunction implements FunctionR1R1 {
        @return the value of the function.
      */
     public double evaluate(double indVar) {
-	return Math.sin(indVar);
+	return Math.cos(indVar);
     }
 
     /**
@@ -27,6 +27,6 @@ public class SineFunction implements FunctionR1R1 {
     }
 
     public String toString() {
-	return "f(x)=sin(x)";
+	return "f(x)=cos(x)";
     }
 }

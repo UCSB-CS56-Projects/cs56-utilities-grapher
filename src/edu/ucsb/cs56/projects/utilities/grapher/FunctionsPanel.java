@@ -9,21 +9,18 @@ A widget that holds a list of functions.
 @version CS56, S13, Project
 */
 public class FunctionsPanel extends JPanel {
-    public FunctionsPanel() {
+    private FunctionR1R1DisplayDataList list;
+
+    public FunctionsPanel(FunctionR1R1DisplayDataList list) {
 	super();
+	this.list = list;
+	/*
 	TableModel data = new AbstractTableModel() {
-		public int getColumnCount() { return 3; }
-		public int getRowCount() { return 100; }
-		public Object getValueAt(int row, int col) {
-		    if (col == 0) {
-			int num = row+1;
-			return new String("f" + num);
-		    }
-		    return new Integer(row);
-		}
+		
 	   
         };
-	JTable t = new JTable(data);
+	*/
+	JTable t = new JTable(new TableData(list));
 	TableColumn c = null;
 	for (int i = 0; i < t.getColumnCount(); i++) {
 	    c = t.getColumnModel().getColumn(i);
@@ -36,5 +33,24 @@ public class FunctionsPanel extends JPanel {
 	//sp.setPreferredWidth(200);
 	sp.setPreferredSize(new Dimension(200,400));
 	this.add(sp);
+    }
+
+    public class TableData extends AbstractTableModel {
+	private FunctionR1R1DisplayDataList list;
+
+	public TableData(FunctionR1R1DisplayDataList list) {
+	    this.list = list;
+	}
+	public int getColumnCount() { return 2; }
+	public int getRowCount() { return list.size(); }
+		public Object getValueAt(int row, int col) {
+		    if (col == 0) {
+			int num = row+1;
+			return new String("f" + num);
+		    } else if (col == 1) {
+			return list.get(row).getFunction().toString();
+		    }
+		    return new Integer(row);
+		}
     }
 }

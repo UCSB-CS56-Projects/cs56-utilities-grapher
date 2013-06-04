@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Graph2DPanel extends JPanel implements ActionListener {
     private ArrayList<FunctionR1R1DisplayData> functions
 	= new ArrayList<FunctionR1R1DisplayData>();
-
+    private FunctionR1R1DisplayDataList fnsdd;
     private Bounds2DFloat bounds;
 
     private Color background = Color.BLACK;
@@ -36,8 +36,9 @@ public class Graph2DPanel extends JPanel implements ActionListener {
        @param function the function to graph.
        @param b the rectangular boundary that determines how much of the graph will be shown.
      */
-    public Graph2DPanel(FunctionR1R1 function, Bounds2DFloat b) {
+    public Graph2DPanel(FunctionR1R1 function, Bounds2DFloat b, FunctionR1R1DisplayDataList fnsdd) {
 	super();
+	this.fnsdd = fnsdd; 
 	functions.add(new FunctionR1R1DisplayData(function, Color.GREEN));
 	this.bounds = b;
 	if(this.bounds == null) {
@@ -70,8 +71,10 @@ public class Graph2DPanel extends JPanel implements ActionListener {
 	drawAxes(g2);
 	
 	if (!graphIsValid) updatePaths();
-	for (FunctionR1R1DisplayData fdd : functions) {
-	   
+
+	for (FunctionR1R1DisplayData fdd : fnsdd) {
+	    
+	    if (fdd == null) System.out.println("fdd was null");
 	    double height = this.getSize().getHeight();
 	    AffineTransform at = new AffineTransform();
 	    at.translate(0, (height / 2));
@@ -104,7 +107,7 @@ public class Graph2DPanel extends JPanel implements ActionListener {
 	double width = this.getSize().getWidth();
 	double height = this.getSize().getHeight();
 	int i = 0;
-	for (FunctionR1R1DisplayData fdd : functions) {
+	for (FunctionR1R1DisplayData fdd : fnsdd) {
 	    fdd.buildPath(bounds, width, height);
 	    i++;
 	}
