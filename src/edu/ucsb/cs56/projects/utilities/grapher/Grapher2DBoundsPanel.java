@@ -22,9 +22,13 @@ public class Grapher2DBoundsPanel extends JPanel implements ActionListener {
      */
     public Grapher2DBoundsPanel(Bounds2DFloat b) {
 	super();
+	setBackground(Color.BLACK);
 	this.bounds = b;
 	bounds.addActionListener(this);
-	this.setLayout(new GridLayout(2,0));
+	
+	//this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+	JPanel top = new JPanel(new FlowLayout());
+	JPanel bottom = new JPanel(new FlowLayout());
 	TextChangeListener t = new TextChangeListener();
 	xMinField = new JTextField("" + bounds.getXMin());
 	yMinField = new JTextField("" + bounds.getYMin());
@@ -36,14 +40,20 @@ public class Grapher2DBoundsPanel extends JPanel implements ActionListener {
 	yMaxField.addActionListener(t);
 	
 	xLabel.setHorizontalAlignment(SwingConstants.CENTER);
+	//xLabel.setForeground(Color.WHITE);
+	//yLabel.setForeground(Color.WHITE);
 	yLabel.setHorizontalAlignment(SwingConstants.CENTER);
 	
-	this.add(xMinField);
-	this.add(xLabel);
-	this.add(xMaxField);
-	this.add(yMinField);
-	this.add(yLabel);
-	this.add(yMaxField);
+	
+	
+	top.add(xMinField);
+	top.add(xLabel);
+	top.add(xMaxField);
+	bottom.add(yMinField);
+	bottom.add(yLabel);
+	bottom.add(yMaxField);
+	this.add(top);
+	this.add(bottom);
     }
 
     /**

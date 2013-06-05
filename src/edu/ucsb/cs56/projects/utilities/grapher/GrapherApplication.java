@@ -2,7 +2,7 @@ package edu.ucsb.cs56.projects.utilities.grapher;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
-
+import javax.swing.border.*;
 /**
    Class to start the grapher utility
    @author Ryan Halbrook
@@ -26,15 +26,20 @@ public class GrapherApplication {
 	appFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	appFrame.setSize(WIDTH, HEIGHT);
 	
-	b = new Bounds2DFloat(0, -1, (float)(Math.PI * 2), 1);
+	b = new Bounds2DFloat(0, -1, 2, 1);
 	fnsdd.add(new FunctionR1R1DisplayData(new SineFunction(), Color.GREEN));
 	fnsdd.add(new FunctionR1R1DisplayData(new CosineFunction(), Color.BLUE));
 	fnsdd.add(new FunctionR1R1DisplayData(new QuadraticFunction(), Color.RED));
 
 	graphPanel = new Graph2DPanel(new SineFunction(),b, fnsdd);
-	appFrame.getContentPane().add(graphPanel);
-	appFrame.getContentPane().add(new Grapher2DBoundsPanel(b), BorderLayout.SOUTH);
-	appFrame.getContentPane().add(new FunctionsPanel(fnsdd), BorderLayout.EAST);
+	
+	JPanel mainPanel = new JPanel(new BorderLayout());
+	//mainPanel.setBorder(BorderFactory.createLineBorder(BevelBorder.LOWERED));
+	mainPanel.add(graphPanel);
+	mainPanel.add(new Grapher2DBoundsPanel(b), BorderLayout.EAST);
+	mainPanel.add(new FunctionsPanel(fnsdd), BorderLayout.WEST);
+	appFrame.getContentPane().add(mainPanel);
+	//appFrame.getContentPane().setBorder(BorderFactory.createLineBorder(Color.BLACK));
 	buildMenuBar();
 	appFrame.setJMenuBar(mb);
 	appFrame.setVisible(true);

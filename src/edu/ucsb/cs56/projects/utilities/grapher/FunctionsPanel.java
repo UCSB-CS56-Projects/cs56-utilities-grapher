@@ -13,6 +13,7 @@ public class FunctionsPanel extends JPanel {
 
     public FunctionsPanel(FunctionR1R1DisplayDataList list) {
 	super();
+	setBackground(Color.BLACK);
 	this.list = list;
 
 	JTable t = new JTable(new TableData(list));
@@ -22,8 +23,8 @@ public class FunctionsPanel extends JPanel {
 	    if (i==0) c.setPreferredWidth(10);
 	    c.setPreferredWidth(10);
 	}
-	this.setPreferredSize(new Dimension(230, 400));
-	t.setBackground(Color.GRAY);
+	//this.setPreferredSize(new Dimension(230, 400));
+	//t.setBackground(Color.GRAY);
 	JScrollPane sp = new JScrollPane(t);
 	sp.setPreferredSize(new Dimension(200,400));
 	this.add(sp);

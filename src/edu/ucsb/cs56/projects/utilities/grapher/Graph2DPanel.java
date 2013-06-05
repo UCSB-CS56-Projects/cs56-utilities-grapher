@@ -4,7 +4,8 @@ import java.awt.*; // Graphics, Graphics2D
 import java.awt.geom.*; // GeneralPath
 import java.awt.event.*;
 import java.util.ArrayList;
-
+import javax.swing.border.*;
+import java.awt.event.*;
 /**
    A JPanel subclass that draws a function to the screen.
    @author Ryan Halbrook
@@ -16,8 +17,8 @@ public class Graph2DPanel extends JPanel implements ActionListener {
     private FunctionR1R1DisplayDataList fnsdd;
     private Bounds2DFloat bounds;
 
-    private Color background = Color.BLACK;
-    private Color foreground = Color.WHITE;
+    private Color background = Color.WHITE;
+    private Color foreground = Color.BLACK;
     
     // Used to only redraw the graph if necessary.
     private boolean graphIsValid = false;
@@ -38,9 +39,16 @@ public class Graph2DPanel extends JPanel implements ActionListener {
      */
     public Graph2DPanel(FunctionR1R1 function, Bounds2DFloat b, FunctionR1R1DisplayDataList fnsdd) {
 	super();
+	this.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
 	this.fnsdd = fnsdd; 
 	functions.add(new FunctionR1R1DisplayData(function, Color.GREEN));
 	this.bounds = b;
+	MouseResponder mr = new MouseResponder();
+	this.addMouseListener(mr);
+	this.addMouseMotionListener(mr);
+	
+	setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+	
 	if(this.bounds == null) {
 	    this.bounds = new Bounds2DFloat();
 	}
@@ -78,7 +86,8 @@ public class Graph2DPanel extends JPanel implements ActionListener {
 	    double height = this.getSize().getHeight();
 	    AffineTransform at = new AffineTransform();
 	    at.translate(0, (height / 2));
-	
+	    
+	    g2.setStroke(new BasicStroke(3));
 	    g2.setColor(fdd.getColor());
 	    g2.draw(fdd.getPath().createTransformedShape(at));
 	}
@@ -121,6 +130,29 @@ public class Graph2DPanel extends JPanel implements ActionListener {
      */
     public void actionPerformed(ActionEvent e) {
 	this.refresh();
+    }
+    
+    public class MouseResponder extends MouseAdapter {
+        double prevX = -1;
+        double prevY = -1;
+        public void mouseDragged(MouseEvent e) {
+            if (prevY == -1) {
+                prevX = e.getX();
+                prevY = e.getY();
+            } else {
+            float xScale = (float)(getSize().getWidth() / (bounds.getXMax() - bounds.getXMin()));
+                double deltaX = -((e.getX() - prevX) / xScale);
+                double deltaY = (e.getY() - prevY);
+                //if (deltaX < 1) deltaX = 0;
+                bounds.translate(deltaX, deltaY);
+                prevX = e.getX(); prevY = e.getY();
+            }
+            System.out.println("Mouse dragged");
+        }
+        public void mousePressed(MouseEvent e) {
+            prevX = e.getX(); prevY = e.getY();
+            System.out.println("Mouse down");
+        }
     }
 
 }

@@ -47,7 +47,7 @@ public class Bounds2DFloat {
        @param x the number of units to translate the bounds in the x direction.
        @param y the number of untis to translate the bounds in the y direction.
     */
-    public void translate(int x, int y) {
+    public void translate(double x, double y) {
 	xMin += x;
 	xMax += x;
 	yMin += y;
