@@ -26,7 +26,7 @@ public class Grapher2DBoundsPanel extends JPanel implements ActionListener {
 	this.bounds = b;
 	bounds.addActionListener(this);
 	
-	//this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+	this.setLayout(new GridLayout(2,0));
 	JPanel top = new JPanel(new FlowLayout());
 	JPanel bottom = new JPanel(new FlowLayout());
 	TextChangeListener t = new TextChangeListener();
@@ -40,11 +40,7 @@ public class Grapher2DBoundsPanel extends JPanel implements ActionListener {
 	yMaxField.addActionListener(t);
 	
 	xLabel.setHorizontalAlignment(SwingConstants.CENTER);
-	//xLabel.setForeground(Color.WHITE);
-	//yLabel.setForeground(Color.WHITE);
-	yLabel.setHorizontalAlignment(SwingConstants.CENTER);
-	
-	
+	yLabel.setHorizontalAlignment(SwingConstants.CENTER);	
 	
 	top.add(xMinField);
 	top.add(xLabel);

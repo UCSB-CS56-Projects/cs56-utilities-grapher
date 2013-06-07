@@ -11,8 +11,8 @@ import javax.swing.border.*;
 public class GrapherApplication {
 
     public static final String TITLE = "2D Function Grapher";
-    public static final int WIDTH = 1000;
-    public static final int HEIGHT = 550;
+    public static final int WIDTH = 750;
+    public static final int HEIGHT = 480;
     public JMenuBar mb = null;
     public Bounds2DFloat b = null;
     public Graph2DPanel graphPanel = null;

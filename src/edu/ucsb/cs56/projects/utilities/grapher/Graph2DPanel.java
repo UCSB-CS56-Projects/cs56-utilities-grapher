@@ -150,11 +150,9 @@ public class Graph2DPanel extends JPanel implements ActionListener {
                 bounds.translate(deltaX, deltaY);
                 prevX = e.getX(); prevY = e.getY();
             }
-            System.out.println("Mouse dragged");
         }
         public void mousePressed(MouseEvent e) {
             prevX = e.getX(); prevY = e.getY();
-            System.out.println("Mouse down");
         }
     }
 
