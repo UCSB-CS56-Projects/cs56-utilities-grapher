@@ -17,8 +17,8 @@ public class Graph2DPanel extends JPanel implements ActionListener {
     private FunctionR1R1DisplayDataList fnsdd;
     private Bounds2DFloat bounds;
 
-    private Color background = Color.WHITE;
-    private Color foreground = Color.BLACK;
+    private Color background = Color.BLACK;
+    private Color foreground = Color.WHITE;
     
     // Used to only redraw the graph if necessary.
     private boolean graphIsValid = false;
@@ -100,41 +100,44 @@ public class Graph2DPanel extends JPanel implements ActionListener {
     private void drawAxes(Graphics g) {
 	
         float width = (float)this.getSize().getWidth();
-	float height = (float)this.getSize().getHeight();
+	    float height = (float)this.getSize().getHeight();
 	
-	// Draw the x axis
-	g.drawLine(0, (int)(height / 2)+ (int)bounds.getYMin(), (int)width, (int)(height / 2)+(int)bounds.getYMin());
+	    // Draw the x axis
+	    g.drawLine(0, (int)(height / 2)+ (int)bounds.getYMin(), (int)width, (int)(height / 2)+(int)bounds.getYMin());
 	
-	// Draw the y axis
-	/*
-	g.drawLine(-(int)(width / 2 + (int)bounds.getXMin()), 0, (int)-(width / 2 + (int)bounds.getXMin()), (int)width);
-	*/
-    }
-
-    /**
-       Updates the paths representing each graph.
-     */
+	    // Draw the y axis
+	    /*
+	    g.drawLine(-(int)(width / 2 + (int)bounds.getXMin()), 0, (int)-(width / 2 + (int)bounds.getXMin()), (int)width);
+	    */
+     }
+    
+        /**
+        Updates the paths representing each graph.
+        */
     private void updatePaths() {
-	double width = this.getSize().getWidth();
-	double height = this.getSize().getHeight();
-	int i = 0;
-	for (FunctionR1R1DisplayData fdd : fnsdd) {
-	    fdd.buildPath(bounds, width, height);
-	    i++;
-	}
+        double width = this.getSize().getWidth();
+	    double height = this.getSize().getHeight();
+	    int i = 0;
+	    for (FunctionR1R1DisplayData fdd : fnsdd) {
+	        fdd.buildPath(bounds, width, height);
+	        i++;
+	    }
+	    repaint();
     }
-
+    
     /**
        Call back for the event that the bounds are changed.
        @param e the ActionEvent object.
      */
     public void actionPerformed(ActionEvent e) {
-	this.refresh();
+	    this.refresh();
     }
     
     public class MouseResponder extends MouseAdapter {
         double prevX = -1;
         double prevY = -1;
+        private boolean controlHeld = false;
+        
         public void mouseDragged(MouseEvent e) {
             if (prevY == -1) {
                 prevX = e.getX();

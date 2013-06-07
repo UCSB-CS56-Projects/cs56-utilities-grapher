@@ -1,17 +1,16 @@
 package edu.ucsb.cs56.projects.utilities.grapher;
 import java.util.*;
-import java.util.regex.*;
+import javax.script.*;
 /**
    A class that represents an arbitrary function that is given by a String.
    @author Ryan Halbrook
    @version CS56, S13, Project
  */
 public class ArbitraryFunctionR1R1 implements FunctionR1R1 {
-    String exp;
     char var;
-
-    private static char[] numerals = {'0','1','2','3','4','5','6','7','8','9'};
-    private static char[] binOps = {'+', '-', '*', '^'};
+    String exp;
+    
+    HashMap<Double, Double> cache = new HashMap<Double, Double>();
     
     /**
        Creates a new object based on the given expression.
@@ -19,8 +18,9 @@ public class ArbitraryFunctionR1R1 implements FunctionR1R1 {
        @param indVar the independent variable in the expression (i.e. 'x').
      */
     public ArbitraryFunctionR1R1(String expression, char indVar) {
-	exp = expression;
-	var = indVar;
+	    exp = expression;
+	    var = indVar;
+	    
     }
 
     public static String removeWhitespace(String str) {
@@ -36,68 +36,39 @@ public class ArbitraryFunctionR1R1 implements FunctionR1R1 {
 	return new String(s, 0, str.length() - removed);
     }
     
-    private boolean containsSubexpressions(String str) {
-	Pattern left  = Pattern.compile("()");
-	Pattern right = Pattern.compile("()");
-	Matcher lm = left.matcher(str);
-	Matcher rm = right.matcher(str);
-	if (lm.matches() || rm.matches()) return true;
-	return false;
-	
-    }
-
     public double evaluate(double indVar) {
-	exp = removeWhitespace(exp);
-	return evaluate(indVar, exp);
+        System.out.println("Cached values: " + cache.size());
+        if (cache.containsKey(indVar)) {
+            System.out.println("Restoring from cache");
+        }
+        System.out.println("About to render");
+        String value = "";
+        try {
+        ScriptEngineManager mgr = new ScriptEngineManager();
+        ScriptEngine eng = mgr.getEngineByName("JavaScript");
+        value = eng.eval(var + " = " + indVar + ", " + exp).toString();
+        
+        //System.out.println("Value of expression: "+value);
+        } catch (ScriptException e) {
+            e.printStackTrace();
+        }
+        
+        try {
+            double result = Double.parseDouble(value);
+            cache.put(indVar, result);
+            return result;
+        } catch (NumberFormatException nfe) {
+            nfe.printStackTrace();
+        }
+        return -1;
     }
-
-    private double evaluate(double indVar, String exp) {
-	if (isNumber(exp)) return Double.parseDouble(exp);
-	if (!containsSubexpressions(exp)) {
-	    for (int i = 0; i < exp.length(); i++) {
-		
-	    }
-	}
-	// Find subexpressions and evaluate them.
-	
-	int start = -1;
-	int end = -1;
-	for (int i = 0; i < exp.length(); i++) {
-	    char c = exp.charAt(i);
-	    if (c == '(') {
-		start = i;
-	    } else if (c == ')') {
-		end = i;
-		
-	    }
-	}
-	return -1; // STUB
-    }
-
-    private boolean isNumber(String s) {
-	boolean decimalFound = false;
-	for (int i = 0; i < s.length(); i++) {
-	    boolean isNumeral = false;
-	    boolean isNegativeSign = false;
-
-	    if (s.charAt(i) == '-') isNegativeSign = true;
-	    if (s.charAt(i) == '.') {
-		if (decimalFound == true) return false;
-		decimalFound = true;
-	    }
-	    for (int j = 0; j < 10; j++) {
-		if (s.charAt(i) == numerals[j]) isNumeral = true;
-	    }
-	    if (isNumeral == false) {
-		if (i == 0 && isNegativeSign) continue;
-		return false;
-	    }
-	}
-	return true;
-    }
-
+    
     public boolean isInDomain(double arg) {
 	return true;
+    }
+    
+    public String toString() {
+        return exp;
     }
 
 }
