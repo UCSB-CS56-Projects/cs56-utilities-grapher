@@ -22,15 +22,20 @@ public class GrapherApplication {
        Start the Grapher Application. 
      */
     public void start() {
+	// Create the window
 	JFrame appFrame = new JFrame(TITLE);
 	appFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	appFrame.setSize(WIDTH, HEIGHT);
 	
+	// Set bounds for graph
 	b = new Bounds2DFloat(0, -1, 2, 1);
+
+	// Add Sine, Cosine, Quadratic functions to the list of functions
 	fnsdd.add(new FunctionR1R1DisplayData(new SineFunction(), Color.GREEN));
 	fnsdd.add(new FunctionR1R1DisplayData(new CosineFunction(), Color.BLUE));
 	fnsdd.add(new FunctionR1R1DisplayData(new QuadraticFunction(), Color.RED));
 
+	// Create panel for graph that will draw functions
 	graphPanel = new Graph2DPanel(new SineFunction(),b, fnsdd);
 	
 	JPanel mainPanel = new JPanel(new BorderLayout());
@@ -41,6 +46,7 @@ public class GrapherApplication {
 	appFrame.getContentPane().add(mainPanel);
 	//appFrame.getContentPane().setBorder(BorderFactory.createLineBorder(Color.BLACK));
 	buildMenuBar();
+
 	appFrame.setJMenuBar(mb);
 	appFrame.setVisible(true);
     }

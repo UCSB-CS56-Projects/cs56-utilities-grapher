@@ -100,15 +100,15 @@ public class Graph2DPanel extends JPanel implements ActionListener {
     private void drawAxes(Graphics g) {
 	
         float width = (float)this.getSize().getWidth();
-	    float height = (float)this.getSize().getHeight();
+	float height = (float)this.getSize().getHeight();
 	
-	    // Draw the x axis
-	    g.drawLine(0, (int)(height / 2)+ (int)bounds.getYMin(), (int)width, (int)(height / 2)+(int)bounds.getYMin());
+	// Draw the x axis
+	g.drawLine(0, (int)(height / 2)+ (int)bounds.getYMin(), (int)width, (int)(height / 2)+(int)bounds.getYMin());
 	
-	    // Draw the y axis
-	    /*
-	    g.drawLine(-(int)(width / 2 + (int)bounds.getXMin()), 0, (int)-(width / 2 + (int)bounds.getXMin()), (int)width);
-	    */
+	// Draw the y axis
+	
+	// g.drawLine(-(int)(width / 2 + (int)bounds.getXMin()), 0, (int)-(width / 2 + (int)bounds.getXMin()), (int)width);
+	g.drawLine((int)(-(int)bounds.getXMin() + width/2), 0, (int)(width / 2 - (int)bounds.getXMin()), (int)height);
      }
     
         /**
