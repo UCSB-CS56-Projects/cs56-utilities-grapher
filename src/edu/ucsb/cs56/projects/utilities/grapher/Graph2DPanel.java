@@ -6,6 +6,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.border.*;
 import java.awt.event.*;
+//import java.lang.Math.*;
 /**
    A JPanel subclass that draws a function to the screen.
    @author Ryan Halbrook
@@ -106,9 +107,9 @@ public class Graph2DPanel extends JPanel implements ActionListener {
 	g.drawLine(0, (int)(height / 2)+ (int)bounds.getYMin(), (int)width, (int)(height / 2)+(int)bounds.getYMin());
 	
 	// Draw the y axis
-	
-	// g.drawLine(-(int)(width / 2 + (int)bounds.getXMin()), 0, (int)-(width / 2 + (int)bounds.getXMin()), (int)width);
-	g.drawLine((int)(-(int)bounds.getXMin() + width/2), 0, (int)(width / 2 - (int)bounds.getXMin()), (int)height);
+	//g.drawLine((int)(width / 2 - (int)bounds.getXMin()), 0, (int)(width / 2 - (int)bounds.getXMin()), (int)height);
+	g.drawLine(-1*(int)bounds.getXMin(), 0, -1*(int)bounds.getXMin(), (int)height);
+	//g.drawLine(0,0,0,(int).5);
      }
     
         /**
@@ -116,13 +117,13 @@ public class Graph2DPanel extends JPanel implements ActionListener {
         */
     private void updatePaths() {
         double width = this.getSize().getWidth();
-	    double height = this.getSize().getHeight();
-	    int i = 0;
-	    for (FunctionR1R1DisplayData fdd : fnsdd) {
-	        fdd.buildPath(bounds, width, height);
-	        i++;
-	    }
-	    repaint();
+	double height = this.getSize().getHeight();
+	int i = 0;
+	for (FunctionR1R1DisplayData fdd : fnsdd) {
+	    fdd.buildPath(bounds, width, height);
+	    i++;
+	}
+	repaint();
     }
     
     /**
