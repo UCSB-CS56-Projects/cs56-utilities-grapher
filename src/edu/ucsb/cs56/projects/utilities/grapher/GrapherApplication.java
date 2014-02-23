@@ -161,13 +161,16 @@ public class GrapherApplication {
 		b.translate(-5,0);
 		graphPanel.refresh();
 	    } else if(e.getActionCommand().equals("cosine")) {
+		//add the function to the list and refresh
 		fnsdd.add(new FunctionR1R1DisplayData(new CosineFunction(), Color.GREEN));
 		graphPanel.refresh();
 	    } else if(e.getActionCommand().equals("sine")) {
+		//add the function to the list and refresh
 		fnsdd.add(new FunctionR1R1DisplayData(new SineFunction(), Color.BLUE));
 		graphPanel.refresh();
 		
 	    } else if(e.getActionCommand().equals("quadratic")) {
+		//add the function to the list and refresh
 		fnsdd.add(new FunctionR1R1DisplayData(new QuadraticFunction(), Color.RED));
 		graphPanel.refresh();
 
