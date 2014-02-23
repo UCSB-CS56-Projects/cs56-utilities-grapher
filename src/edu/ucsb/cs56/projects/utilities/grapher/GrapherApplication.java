@@ -161,19 +161,36 @@ public class GrapherApplication {
 		b.translate(-5,0);
 		graphPanel.refresh();
 	    } else if(e.getActionCommand().equals("cosine")) {
-		//add the function to the list and refresh
-		fnsdd.add(new FunctionR1R1DisplayData(new CosineFunction(), Color.GREEN));
-		graphPanel.refresh();
+		// If the functon already exists, do not add it
+		FunctionR1R1DisplayData cosineFunction = new FunctionR1R1DisplayData(new CosineFunction(), Color.GREEN);
+		if(fnsdd != null){
+		    if(fnsdd.contains(cosineFunction)==false){
+			// Add the function to the list and refresh
+			fnsdd.add(cosineFunction);
+			graphPanel.refresh();
+		    }
+		}
 	    } else if(e.getActionCommand().equals("sine")) {
-		//add the function to the list and refresh
-		fnsdd.add(new FunctionR1R1DisplayData(new SineFunction(), Color.BLUE));
-		graphPanel.refresh();
+		// If the functon already exists, do not add it
+		FunctionR1R1DisplayData sineFunction = new FunctionR1R1DisplayData(new SineFunction(), Color.BLUE);
+		if(fnsdd != null){
+		    if(fnsdd.contains(sineFunction)==false){
+			// Add the function to the list and refresh
+			fnsdd.add(sineFunction);
+			graphPanel.refresh();
+		    }
+		}
 		
 	    } else if(e.getActionCommand().equals("quadratic")) {
-		//add the function to the list and refresh
-		fnsdd.add(new FunctionR1R1DisplayData(new QuadraticFunction(), Color.RED));
-		graphPanel.refresh();
-
+		// If the functon already exists, do not add it
+		FunctionR1R1DisplayData quadFunction = new FunctionR1R1DisplayData(new QuadraticFunction(), Color.RED);
+		if(fnsdd != null){
+		    if(fnsdd.contains(quadFunction)==false){
+			// Add the function to the list and refresh
+			fnsdd.add(quadFunction);
+			graphPanel.refresh();
+		    }
+		}
 	    }
 	}
     }
