@@ -10,13 +10,14 @@ A widget that holds a list of functions.
 */
 public class FunctionsPanel extends JPanel{
     private FunctionR1R1DisplayDataList list;
+    public JTable t = null;//public so we can update the table
 
     public FunctionsPanel(FunctionR1R1DisplayDataList list) {
 	super();
 	setBackground(Color.BLACK);
 	this.list = list;
 
-	JTable t = new JTable(new TableData(list));
+	t = new JTable(new TableData(list));
 	TableColumn c = null;
 	for (int i = 0; i < t.getColumnCount(); i++) {
 	    c = t.getColumnModel().getColumn(i);
