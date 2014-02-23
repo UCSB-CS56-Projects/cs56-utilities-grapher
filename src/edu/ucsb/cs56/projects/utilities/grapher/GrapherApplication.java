@@ -16,6 +16,8 @@ public class GrapherApplication {
     public JMenuBar mb = null;
     public Bounds2DFloat b = null;
     public Graph2DPanel graphPanel = null;
+    public FunctionsPanel functionsPanel= null;
+    public JPanel mainPanel = null;
     private FunctionR1R1DisplayDataList fnsdd = new FunctionR1R1DisplayDataList();
 
     /**
@@ -31,18 +33,22 @@ public class GrapherApplication {
 	b = new Bounds2DFloat(0, -1, 2, 1);
 
 	// Add Sine, Cosine, Quadratic functions to the list of functions
-	fnsdd.add(new FunctionR1R1DisplayData(new SineFunction(), Color.GREEN));
-	fnsdd.add(new FunctionR1R1DisplayData(new CosineFunction(), Color.BLUE));
-	fnsdd.add(new FunctionR1R1DisplayData(new QuadraticFunction(), Color.RED));
+	//fnsdd.add(new FunctionR1R1DisplayData(new SineFunction(), Color.GREEN));
+	//fnsdd.add(new FunctionR1R1DisplayData(new CosineFunction(), Color.BLUE));
+	//fnsdd.add(new FunctionR1R1DisplayData(new QuadraticFunction(), Color.RED));
 
 	// Create panel for graph that will draw functions
 	graphPanel = new Graph2DPanel(new SineFunction(),b, fnsdd);
+
+	// Create panel for functions table
+	functionsPanel = new FunctionsPanel(fnsdd);
 	
-	JPanel mainPanel = new JPanel(new BorderLayout());
+	mainPanel = new JPanel(new BorderLayout());
 	//mainPanel.setBorder(BorderFactory.createLineBorder(BevelBorder.LOWERED));
 	mainPanel.add(graphPanel);
 	mainPanel.add(new Grapher2DBoundsPanel(b), BorderLayout.EAST);
-	mainPanel.add(new FunctionsPanel(fnsdd), BorderLayout.WEST);
+	//mainPanel.add(new FunctionsPanel(fnsdd), BorderLayout.WEST);
+	mainPanel.add(functionsPanel, BorderLayout.WEST);
 	appFrame.getContentPane().add(mainPanel);
 	//appFrame.getContentPane().setBorder(BorderFactory.createLineBorder(Color.BLACK));
 	buildMenuBar();
@@ -65,17 +71,23 @@ public class GrapherApplication {
      */
     public void buildMenuBar() {
 	mb = new JMenuBar();
-	JMenu scale = new JMenu("Scale");
+	
+	//Add scale option and suboptions to bar
+	JMenu scaleOp = new JMenu("Scale");
 	JMenuItem scaleTimesTwo = new JMenuItem("x2");
 	JMenuItem scaleHalf = new JMenuItem("x0.5");
+
 	scaleTimesTwo.setActionCommand("s2times");
 	scaleHalf.setActionCommand("s0.5times");
+
 	scaleTimesTwo.addActionListener(new ButtonListener());
 	scaleHalf.addActionListener(new ButtonListener());
-	scale.add(scaleTimesTwo);
-	scale.add(scaleHalf);
 
-	JMenu translate = new JMenu("Translate");
+	scaleOp.add(scaleTimesTwo);
+	scaleOp.add(scaleHalf);
+
+	//Add translate option and suboptions to bar
+	JMenu translateOp = new JMenu("Translate");
 	JMenuItem translateFive = new JMenuItem ("Right 5");
 	JMenuItem translateFiveUp = new JMenuItem("Up 5");
 	JMenuItem translateFiveLeft = new JMenuItem("Left 5");
@@ -91,13 +103,36 @@ public class GrapherApplication {
 	translateFiveLeft.addActionListener(new ButtonListener());
 	translateFiveDown.addActionListener(new ButtonListener());
 
-	translate.add(translateFive);
-	translate.add(translateFiveUp);
-	translate.add(translateFiveLeft);
-	translate.add(translateFiveDown);
+	translateOp.add(translateFive);
+	translateOp.add(translateFiveUp);
+	translateOp.add(translateFiveLeft);
+	translateOp.add(translateFiveDown);
 
-	mb.add(scale);
-	mb.add(translate);
+	//Add functions option and suboptions to bar
+	JMenu functionsOp = new JMenu("Functions");
+	JMenuItem cosine = new JMenuItem("Cosine");
+	JMenuItem sine = new JMenuItem("Sine");
+	JMenuItem quadratic = new JMenuItem("x^2");
+	JMenuItem customQuad = new JMenuItem("Custom Quadratic");
+
+	cosine.setActionCommand("cosine");
+	sine.setActionCommand("sine");
+	quadratic.setActionCommand("quadratic");
+	customQuad.setActionCommand("customQuad");
+
+	cosine.addActionListener(new ButtonListener());
+	sine.addActionListener(new ButtonListener());
+	quadratic.addActionListener(new ButtonListener());
+	customQuad.addActionListener(new ButtonListener());
+
+	functionsOp.add(cosine);
+	functionsOp.add(sine);
+	functionsOp.add(quadratic);
+	functionsOp.add(customQuad);
+
+	mb.add(scaleOp);
+	mb.add(translateOp);
+	mb.add(functionsOp);
     }
 
     /**
@@ -125,6 +160,17 @@ public class GrapherApplication {
 	    } else if (e.getActionCommand().equals("translateX-5")) {
 		b.translate(-5,0);
 		graphPanel.refresh();
+	    } else if(e.getActionCommand().equals("cosine")) {
+		fnsdd.add(new FunctionR1R1DisplayData(new CosineFunction(), Color.GREEN));
+		graphPanel.refresh();
+	    } else if(e.getActionCommand().equals("sine")) {
+		fnsdd.add(new FunctionR1R1DisplayData(new SineFunction(), Color.BLUE));
+		graphPanel.refresh();
+		
+	    } else if(e.getActionCommand().equals("quadratic")) {
+		fnsdd.add(new FunctionR1R1DisplayData(new QuadraticFunction(), Color.RED));
+		graphPanel.refresh();
+
 	    }
 	}
     }

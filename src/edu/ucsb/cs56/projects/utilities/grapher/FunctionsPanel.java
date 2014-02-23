@@ -8,7 +8,7 @@ A widget that holds a list of functions.
 @author Ryan Halbrook
 @version CS56, S13, Project
 */
-public class FunctionsPanel extends JPanel {
+public class FunctionsPanel extends JPanel{
     private FunctionR1R1DisplayDataList list;
 
     public FunctionsPanel(FunctionR1R1DisplayDataList list) {

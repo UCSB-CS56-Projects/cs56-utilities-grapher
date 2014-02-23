@@ -13,8 +13,7 @@ import java.awt.event.*;
    @version CS56, Spring 2013
  */
 public class Graph2DPanel extends JPanel implements ActionListener {
-    private ArrayList<FunctionR1R1DisplayData> functions
-	= new ArrayList<FunctionR1R1DisplayData>();
+    private ArrayList<FunctionR1R1DisplayData> functions = new ArrayList<FunctionR1R1DisplayData>();
     private FunctionR1R1DisplayDataList fnsdd;
     private Bounds2DFloat bounds;
 
