@@ -26,6 +26,7 @@ public class CustomQuadraticFunctionTest{
 
      /**
         Test evaluate method that evaluates using an independent variable
+	In this case, independent variable is 0
         @see CustomQuadraticFunction#evaluate(double indVar)
     */
     @Test public void testEvaluate0() {
@@ -35,6 +36,7 @@ public class CustomQuadraticFunctionTest{
 
     /**
         Test evaluate method that evaluates using an independent variable
+	In this case, independent variable is 1
         @see CustomQuadraticFunction#evaluate(double indVar)
     */
      @Test public void testEvaluate1() {
@@ -44,11 +46,22 @@ public class CustomQuadraticFunctionTest{
 
      /**
         Test evaluate method that evaluates using an independent variable
+	In this case, independent variable is 2
         @see CustomQuadraticFunction#evaluate(double indVar)
     */
      @Test public void testEvaluate2() {
 	CustomQuadraticFunction p = new CustomQuadraticFunction(new int[] {2,1,5});
 	assertEquals(15, (int)p.evaluate(2));
+    }
+
+     /**
+        Test evaluate method that evaluates using an independent variable
+	In this case, independent variable is -3
+        @see CustomQuadraticFunction#evaluate(double indVar)
+    */
+     @Test public void testEvaluate3() {
+	CustomQuadraticFunction p = new CustomQuadraticFunction(new int[] {2,1,5});
+	assertEquals(20, (int)p.evaluate(-3));
     }
 
      /**
