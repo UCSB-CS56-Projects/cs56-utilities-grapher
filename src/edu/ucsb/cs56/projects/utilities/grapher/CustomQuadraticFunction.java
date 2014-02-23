@@ -37,12 +37,14 @@ public class CustomQuadraticFunction extends ArrayList<Integer> implements Funct
         for(int i = 0; i<this.size(); i++){
 
 	    //evaluate x^i
-	    for(int j = 1; j<i; j++){
+	    for(int j = 1; j<=i; j++){
 		product *= indVar;
 	    }
 
 	    //evaluate coefficient times x^i
 	    solution += product*this.get(i);
+	    //reset product to 1
+	    product = 1;
 	}
 	
 	return solution;
