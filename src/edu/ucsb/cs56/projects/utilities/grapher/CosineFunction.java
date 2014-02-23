@@ -26,7 +26,19 @@ public class CosineFunction implements FunctionR1R1 {
 	return true;
     }
 
+    @Override
     public String toString() {
 	return "f(x)=cos(x)";
+    }
+
+    @Override
+    public boolean equals(Object o){
+	if(o == null)
+	    return false;
+	// Only depends on whether or not it is a cosine function
+	if(!(o instanceof CosineFunction))
+	    return false;
+	
+	return true;
     }
 }
