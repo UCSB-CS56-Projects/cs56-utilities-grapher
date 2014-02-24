@@ -68,8 +68,17 @@ public class CustomQuadraticFunctionTest{
 	Test toString method
 	@see CustomQuadraticFunction#toString()
      */
-    @Test public void testToString() {
+    @Test public void testToString1() {
 	CustomQuadraticFunction p1 = new CustomQuadraticFunction(new int[] {5,1,2});
-	assertEquals("2x^2 + x + 5", p1.toString());
+	assertEquals("f(x)=2x^2 + x + 5", p1.toString());
+    }
+
+    /**
+	Test toString method
+	@see CustomQuadraticFunction#toString()
+     */
+    @Test public void testToString2() {
+	CustomQuadraticFunction p2 = new CustomQuadraticFunction(new int[] {5,1,0});
+	assertEquals("f(x)=x + 5", p2.toString());
     }
 }

@@ -16,9 +16,15 @@ public class CustomQuadraticFunction extends ArrayList<Integer> implements Funct
 	@param coeffsHighToLow array of coefficients from lowest to highest degree
     */
     public CustomQuadraticFunction(int [] coeffsLowToHigh){
-	//takes coefficients from low to high
-	for(int i = 0; i < coeffsLowToHigh.length; i++)
-	    //adds coeffs to match index number
+	int j = 0;
+
+	// Skip any trailing zeros after the highest power
+	for(j = coeffsLowToHigh.length-1; j>=0; j--){
+	    if(coeffsLowToHigh[j] != 0)
+		break;
+	}
+	// Take coeffs from low to high
+	for(int i = 0; i < j+1; i++)
 	    this.add(coeffsLowToHigh[i]);
     }
 
@@ -33,17 +39,18 @@ public class CustomQuadraticFunction extends ArrayList<Integer> implements Funct
 	double solution = 0.0;
 	double product = 1.0; //because x^0 = 1
 
-	//for each coefficient
+	// For each coefficient
         for(int i = 0; i<this.size(); i++){
 
-	    //evaluate x^i
+	    // Evaluate x^i
 	    for(int j = 1; j<=i; j++){
 		product *= indVar;
 	    }
 
-	    //evaluate coefficient times x^i
+	    // Evaluate coefficient times x^i
 	    solution += product*this.get(i);
-	    //reset product to 1
+
+	    // Reset product to 1
 	    product = 1.0;
 	}
 	
@@ -62,13 +69,13 @@ public class CustomQuadraticFunction extends ArrayList<Integer> implements Funct
 
     public String toString() {
         String poly = "0";
-	//single constant
+	// Single constant
 	if(this.size() == 1){
 	    poly = Integer.toString(this.get(0));
-	    return poly;
+	    return "f(x)="+poly;
 	}
 
-	//degree 1
+	// Degree 1
 	if(this.size() == 2){
 	    if(this.get(1) == 1)
 		poly = "x";
@@ -82,10 +89,10 @@ public class CustomQuadraticFunction extends ArrayList<Integer> implements Funct
 	    if(this.get(0) < 0)
 		poly += " - " + (-1)*this.get(0);
 
-	    return poly;
+	    return "f(x)="+poly;
 	}
 
-	//configure initial term
+	// Configure initial term
 	if(this.get(this.size() -1) == 1){
 	    poly = "x^" + (this.size()-1);
 	}
@@ -96,13 +103,13 @@ public class CustomQuadraticFunction extends ArrayList<Integer> implements Funct
 	    poly = this.get(this.size()-1) + "x^" + (this.size()-1);
 	}
 
-	//run through things without "^" character
+	// Run through things without "^" character
 	for(int i = (this.size() -2); i>=0; i--){
-	    //skip any 0 terms
+	    // Skip any 0 terms
 	    if(this.get(i) == 0){
 		continue;
 	    }
-	    //for those that needs "^" symbol
+	    // For those that needs "^" symbol
 	    if(i > 1){
 		if(this.get(i) == 1)
 		    poly += (" + x^" + i);
@@ -111,14 +118,14 @@ public class CustomQuadraticFunction extends ArrayList<Integer> implements Funct
 		else if(this.get(i) < 0)
 		    poly += (" - " + (-1)*this.get(i) + "x^" + i);
 	    }
-	    //for a constant
+	    // For a constant
 	    if(i == 0){
 		if(this.get(i) > 0)
 		    poly += (" + " + this.get(i));
 		else if(this.get(i) < 0)
 		    poly += (" - " + (-1)*this.get(i));
 	    }
-	    //for which no "^" symbol is needed
+	    // For which no "^" symbol is needed
 	    if(i == 1){
 		if(this.get(i) == 1)
 		    poly += (" + x");
@@ -128,6 +135,6 @@ public class CustomQuadraticFunction extends ArrayList<Integer> implements Funct
 		    poly += (" - " + (-1)*this.get(i) + "x");	
 	    }
 	}
-	return poly; //return full string
+	return "f(x)="+poly; // Return full string
     }
 }
