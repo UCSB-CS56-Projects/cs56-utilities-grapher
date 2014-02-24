@@ -11,15 +11,15 @@ public class CustomQuadraticFunction extends ArrayList<Integer> implements Funct
 
     /** 
 	Constructs from int array of coefficients
-	The coefficients are listed in order from highest to lowest degree
+	The coefficients are listed in order from lowest to highest degree
 
-	@param coeffsHighToLow array of coefficients from highest to lowest degree
+	@param coeffsHighToLow array of coefficients from lowest to highest degree
     */
-    public CustomQuadraticFunction(int [] coeffsHighToLow){
-	//takes coefficients from high to low
-	for(int i = coeffsHighToLow.length-1; i>=0; i--)
-	    //adds coeffs backwards to match index number
-	    this.add(coeffsHighToLow[i]);
+    public CustomQuadraticFunction(int [] coeffsLowToHigh){
+	//takes coefficients from low to high
+	for(int i = 0; i < coeffsLowToHigh.length; i++)
+	    //adds coeffs to match index number
+	    this.add(coeffsLowToHigh[i]);
     }
 
     /**
