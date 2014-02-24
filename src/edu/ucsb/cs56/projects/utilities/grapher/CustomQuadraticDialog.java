@@ -3,11 +3,23 @@ import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.beans.*;
 
-class CustomQuadraticDialog {
+/**
+   <p>A widget that the user inputs coefficients into to create a custom quadratic function. It acts as the middleman between user input and creating a new function.
+   <p>The widget contains the text fields to input numbers into and displays a JPanel with and input area and button options.
+   <p>The widget creates and returns a new custom quadratic function when the form is submitted.
+
+   @author Jenny So
+   @version CS56, W14, Project
+*/
+
+public class CustomQuadraticDialog {
     private JTextField[] textFields;
 
+    /** 
+	Construct from the desired length of polynomial
+	@param length is the desired length of the polynomial
+    */
     public CustomQuadraticDialog(int length) {
 
 	// Fill with text fields for user input
@@ -18,6 +30,9 @@ class CustomQuadraticDialog {
 	}
     }
 
+    /**
+        Displays the dialog and returns if "OK" has been clicked.
+    */
     public boolean display(){
 
 	// Create the panel
@@ -45,6 +60,9 @@ class CustomQuadraticDialog {
 	    return false;
     }
 
+    /** 
+	Creates a new custom quadratic function from the text fields of the widget and returns it
+     */
     public CustomQuadraticFunction inputCoeffs(){
 	int[] intFields = new int[textFields.length];
 
