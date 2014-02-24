@@ -13,6 +13,7 @@ public class GrapherApplication {
     public static final String TITLE = "2D Function Grapher";
     public static final int WIDTH = 750;
     public static final int HEIGHT = 480;
+    public CustomQuadraticDialog quadDialog = null;
     public JMenuBar mb = null;
     public Bounds2DFloat b = null;
     public Graph2DPanel graphPanel = null;
@@ -55,6 +56,8 @@ public class GrapherApplication {
 
 	appFrame.setJMenuBar(mb);
 	appFrame.setVisible(true);
+
+	quadDialog = new CustomQuadraticDialog(5);
     }
 
     /**
@@ -190,6 +193,11 @@ public class GrapherApplication {
 			fnsdd.add(quadFunction);
 			graphPanel.refresh();
 		    }
+		}
+	    } else if(e.getActionCommand().equals("customQuad")) {
+		if(quadDialog.display() == true){
+		    fnsdd.add(new FunctionR1R1DisplayData(quadDialog.inputCoeffs(), Color.CYAN));
+		    graphPanel.refresh();
 		}
 	    }
 	}
