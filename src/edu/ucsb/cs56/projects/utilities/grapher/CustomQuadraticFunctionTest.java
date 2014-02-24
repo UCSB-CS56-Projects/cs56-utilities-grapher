@@ -18,7 +18,7 @@ public class CustomQuadraticFunctionTest{
     */
 
     @Test public void testConstructorIntArray(){
-	CustomQuadraticFunction p = new CustomQuadraticFunction(new int[] {2,1,5});
+	CustomQuadraticFunction p = new CustomQuadraticFunction(new int[] {5,1,2});
 	assertEquals(2, (int)p.get(2));
 	assertEquals(1, (int)p.get(1));
 	assertEquals(5, (int)p.get(0));
@@ -30,7 +30,7 @@ public class CustomQuadraticFunctionTest{
         @see CustomQuadraticFunction#evaluate(double indVar)
     */
     @Test public void testEvaluate0() {
-	CustomQuadraticFunction p = new CustomQuadraticFunction(new int[] {2,1,5});
+	CustomQuadraticFunction p = new CustomQuadraticFunction(new int[] {5,1,2});
 	assertEquals(5, (int)p.evaluate(0));
     }
 
@@ -40,7 +40,7 @@ public class CustomQuadraticFunctionTest{
         @see CustomQuadraticFunction#evaluate(double indVar)
     */
      @Test public void testEvaluate1() {
-	CustomQuadraticFunction p = new CustomQuadraticFunction(new int[] {2,1,5});
+	CustomQuadraticFunction p = new CustomQuadraticFunction(new int[] {5,1,2});
 	assertEquals(8, (int)p.evaluate(1));
     }
 
@@ -50,7 +50,7 @@ public class CustomQuadraticFunctionTest{
         @see CustomQuadraticFunction#evaluate(double indVar)
     */
      @Test public void testEvaluate2() {
-	CustomQuadraticFunction p = new CustomQuadraticFunction(new int[] {2,1,5});
+	CustomQuadraticFunction p = new CustomQuadraticFunction(new int[] {5,1,2});
 	assertEquals(15, (int)p.evaluate(2));
     }
 
@@ -60,7 +60,7 @@ public class CustomQuadraticFunctionTest{
         @see CustomQuadraticFunction#evaluate(double indVar)
     */
      @Test public void testEvaluate3() {
-	CustomQuadraticFunction p = new CustomQuadraticFunction(new int[] {2,1,5});
+	CustomQuadraticFunction p = new CustomQuadraticFunction(new int[] {5,1,2});
 	assertEquals(20, (int)p.evaluate(-3));
     }
 
@@ -69,7 +69,7 @@ public class CustomQuadraticFunctionTest{
 	@see CustomQuadraticFunction#toString()
      */
     @Test public void testToString() {
-	CustomQuadraticFunction p1 = new CustomQuadraticFunction(new int[] {2,1,5});
+	CustomQuadraticFunction p1 = new CustomQuadraticFunction(new int[] {5,1,2});
 	assertEquals("2x^2 + x + 5", p1.toString());
     }
 }
