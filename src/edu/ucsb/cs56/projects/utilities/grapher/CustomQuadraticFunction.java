@@ -30,8 +30,8 @@ public class CustomQuadraticFunction extends ArrayList<Integer> implements Funct
        @return the value of the function.
      */
     public double evaluate(double indVar) {
-	int solution = 0;
-	int product = 1; //because x^0 = 1
+	double solution = 0.0;
+	double product = 1.0; //because x^0 = 1
 
 	//for each coefficient
         for(int i = 0; i<this.size(); i++){
@@ -44,7 +44,7 @@ public class CustomQuadraticFunction extends ArrayList<Integer> implements Funct
 	    //evaluate coefficient times x^i
 	    solution += product*this.get(i);
 	    //reset product to 1
-	    product = 1;
+	    product = 1.0;
 	}
 	
 	return solution;
