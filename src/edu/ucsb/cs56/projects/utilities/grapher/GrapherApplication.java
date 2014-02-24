@@ -57,7 +57,7 @@ public class GrapherApplication {
 	appFrame.setJMenuBar(mb);
 	appFrame.setVisible(true);
 
-	quadDialog = new CustomQuadraticDialog(5);
+	quadDialog = new CustomQuadraticDialog(6);
     }
 
     /**
