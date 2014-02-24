@@ -19,7 +19,7 @@ public class CustomQuadraticFunction extends ArrayList<Integer> implements Funct
 	int j = 0;
 
 	// Skip any trailing zeros after the highest power
-	for(j = coeffsLowToHigh.length-1; j>=0; j--){
+	for(j = coeffsLowToHigh.length-1; j>0; j--){
 	    if(coeffsLowToHigh[j] != 0)
 		break;
 	}
