@@ -3,6 +3,8 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.border.*;
+import javax.swing.event.*;
+
 /**
    Class to start the grapher utility
    @author Ryan Halbrook
@@ -33,11 +35,6 @@ public class GrapherApplication {
 	// Set bounds for graph
 	b = new Bounds2DFloat(0, -1, 2, 1);
 
-	// Add Sine, Cosine, Quadratic functions to the list of functions
-	//fnsdd.add(new FunctionR1R1DisplayData(new SineFunction(), Color.GREEN));
-	//fnsdd.add(new FunctionR1R1DisplayData(new CosineFunction(), Color.BLUE));
-	//fnsdd.add(new FunctionR1R1DisplayData(new QuadraticFunction(), Color.RED));
-
 	// Create panel for graph that will draw functions
 	graphPanel = new Graph2DPanel(new SineFunction(),b, fnsdd);
 
@@ -52,12 +49,21 @@ public class GrapherApplication {
 	mainPanel.add(functionsPanel, BorderLayout.WEST);
 	appFrame.getContentPane().add(mainPanel);
 	//appFrame.getContentPane().setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+	// Create JSlider
+	JSlider zoomSlider = new JSlider(JSlider.HORIZONTAL, 0, 30, 15);
+	zoomSlider.addChangeListener(new SliderListener());
+	graphPanel.add(zoomSlider);
+	
 	buildMenuBar();
 
+	
 	appFrame.setJMenuBar(mb);
 	appFrame.setVisible(true);
 
 	quadDialog = new CustomQuadraticDialog(6);
+
+	
     }
 
     /**
@@ -136,6 +142,19 @@ public class GrapherApplication {
 	mb.add(scaleOp);
 	mb.add(translateOp);
 	mb.add(functionsOp);
+    }
+    
+    /**
+       Listener for when the slider is moved.
+    */
+    public class SliderListener implements ChangeListener {
+	public void stateChanged(ChangeEvent e){
+	    JSlider source = (JSlider)e.getSource();
+	    
+		int fps = (int)source.getValue();
+		b.scale(fps);
+	    
+	}
     }
 
     /**
