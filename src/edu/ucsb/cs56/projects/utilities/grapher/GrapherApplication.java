@@ -50,20 +50,18 @@ public class GrapherApplication {
 	appFrame.getContentPane().add(mainPanel);
 	//appFrame.getContentPane().setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-	// Create JSlider
-	JSlider zoomSlider = new JSlider(JSlider.HORIZONTAL, 0, 30, 15);
+	// Create JSlider that spans from -15 to 15. Default value is 0.
+	JSlider zoomSlider = new JSlider(JSlider.HORIZONTAL, -15, 15, 0);
 	zoomSlider.addChangeListener(new SliderListener());
 	graphPanel.add(zoomSlider);
 	
 	buildMenuBar();
 
-	
 	appFrame.setJMenuBar(mb);
 	appFrame.setVisible(true);
 
-	quadDialog = new CustomQuadraticDialog(6);
-
-	
+	// Create the dialog that will pop up when selected in menu bar. 6 is the maximum power polynomial minus 1.
+	quadDialog = new CustomQuadraticDialog(6);	
     }
 
     /**
@@ -117,28 +115,32 @@ public class GrapherApplication {
 	translateOp.add(translateFiveLeft);
 	translateOp.add(translateFiveDown);
 
-	//Add functions option and suboptions to bar
+	// Add functions option and suboptions to bar
 	JMenu functionsOp = new JMenu("Functions");
 	JMenuItem cosine = new JMenuItem("Cosine");
 	JMenuItem sine = new JMenuItem("Sine");
 	JMenuItem quadratic = new JMenuItem("x^2");
 	JMenuItem customQuad = new JMenuItem("Custom Quadratic");
 
+	// Set commands
 	cosine.setActionCommand("cosine");
 	sine.setActionCommand("sine");
 	quadratic.setActionCommand("quadratic");
 	customQuad.setActionCommand("customQuad");
 
+	// Add listener to buttons
 	cosine.addActionListener(new ButtonListener());
 	sine.addActionListener(new ButtonListener());
 	quadratic.addActionListener(new ButtonListener());
 	customQuad.addActionListener(new ButtonListener());
-
+	
+	// Add buttons to the functions options
 	functionsOp.add(cosine);
 	functionsOp.add(sine);
 	functionsOp.add(quadratic);
 	functionsOp.add(customQuad);
 
+	// Add all option links to the bar
 	mb.add(scaleOp);
 	mb.add(translateOp);
 	mb.add(functionsOp);
@@ -148,11 +150,29 @@ public class GrapherApplication {
        Listener for when the slider is moved.
     */
     public class SliderListener implements ChangeListener {
+	public int sliderState = 0; // The most recent slider value
+
+	/** Callback for when the slider is moved.
+	    @param e the event object */
 	public void stateChanged(ChangeEvent e){
+
+	    // Recieve the source of change (in this case, zoomSlider)
 	    JSlider source = (JSlider)e.getSource();
 	    
-		int fps = (int)source.getValue();
-		b.scale(fps);
+	    // Get the state of slider value after change
+	    int state  = (int)source.getValue();
+	    
+	    // Compare the previous state and new state of slider value
+	    int change = state - this.sliderState;
+
+	    // If the change is position, zoom out. If negative, zoom in.
+	    if(change > 0)
+		b.scale(0.5f);
+	    if(change < 0)
+		b.scale(2.0f);
+
+	    // Update the most recent state of slider value
+	    this.sliderState = state;
 	    
 	}
     }
