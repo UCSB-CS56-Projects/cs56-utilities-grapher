@@ -106,8 +106,11 @@ public class Graph2DPanel extends JPanel implements ActionListener {
 	g.drawLine(0, (int)(height / 2)+ (int)bounds.getYMin(), (int)width, (int)(height / 2)+(int)bounds.getYMin());
 	
 	// Draw the y axis
-	//g.drawLine((int)(width / 2 - (int)bounds.getXMin()), 0, (int)(width / 2 - (int)bounds.getXMin()), (int)height);
-	g.drawLine(-1*(int)bounds.getXMin(), 0, -1*(int)bounds.getXMin(), (int)height);
+	//int xScale = (int)(width / (bounds.getXMax() - bounds.getXMin()));
+	//float xScale = width/2;
+	//g.drawLine((int)(width / 2 - (int)bounds.getXMin())/(int)xScale, 0, (int)(width / 2 - (int)bounds.getXMin())/(int)xScale, (int)height);
+	
+	//g.drawLine(-1*(int)bounds.getXMin()*(int)xScale/(int)1.5, 0, -1*(int)bounds.getXMin()*(int)xScale/(int)1.5, (int)height);
 	//g.drawLine(0,0,0,(int).5);
      }
     
@@ -143,7 +146,7 @@ public class Graph2DPanel extends JPanel implements ActionListener {
                 prevX = e.getX();
                 prevY = e.getY();
             } else {
-            float xScale = (float)(getSize().getWidth() / (bounds.getXMax() - bounds.getXMin()));
+		float xScale = (float)(getSize().getWidth() / (bounds.getXMax() - bounds.getXMin()));
                 double deltaX = -((e.getX() - prevX) / xScale);
                 double deltaY = (e.getY() - prevY);
                 //if (deltaX < 1) deltaX = 0;
