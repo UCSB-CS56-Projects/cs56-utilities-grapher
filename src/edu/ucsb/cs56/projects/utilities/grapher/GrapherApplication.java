@@ -167,9 +167,9 @@ public class GrapherApplication {
 
 	    // If the change is position, zoom out. If negative, zoom in.
 	    if(change > 0)
-		b.scale(0.5f);
+		b.scale(0.8f);
 	    if(change < 0)
-		b.scale(2.0f);
+		b.scale(1.25f);
 
 	    // Update the most recent state of slider value
 	    this.sliderState = state;
