@@ -107,11 +107,8 @@ public class Graph2DPanel extends JPanel implements ActionListener {
 	
 	// Draw the y axis
 	//int xScale = (int)(width / (bounds.getXMax() - bounds.getXMin()));
-	//float xScale = width/2;
-	//g.drawLine((int)(width / 2 - (int)bounds.getXMin())/(int)xScale, 0, (int)(width / 2 - (int)bounds.getXMin())/(int)xScale, (int)height);
-	
-	//g.drawLine(-1*(int)bounds.getXMin()*(int)xScale/(int)1.5, 0, -1*(int)bounds.getXMin()*(int)xScale/(int)1.5, (int)height);
-	//g.drawLine(0,0,0,(int).5);
+	//g.drawLine(-1*(int)bounds.getXMin()*(int)xScale, 0, -1*(int)bounds.getXMin()*(int)xScale, (int)height);
+
      }
     
         /**
