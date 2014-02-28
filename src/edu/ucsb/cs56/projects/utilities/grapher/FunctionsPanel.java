@@ -30,6 +30,16 @@ public class FunctionsPanel extends JPanel{
 	sp.setPreferredSize(new Dimension(200,400));
 	this.add(sp);
     }
+    /** 
+        Adds a row in the table display.
+    */
+    public void displayNewRow() {
+	// getModel returns as TableModel, so cast as TableData
+	TableData dataModel = (TableData)t.getModel();
+
+	// Notify the data model that a row has been inserted
+	dataModel.fireTableRowsInserted(list.size()-1, list.size()-1);
+    }
 
     public class TableData extends AbstractTableModel {
 	private FunctionR1R1DisplayDataList list;
@@ -48,5 +58,6 @@ public class FunctionsPanel extends JPanel{
 	    }
 	    return new Integer(row);
 	}
+	
     }
 }

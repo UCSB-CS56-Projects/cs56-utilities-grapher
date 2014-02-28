@@ -210,6 +210,8 @@ public class GrapherApplication {
 			// Add the function to the list and refresh
 			fnsdd.add(cosineFunction);
 			graphPanel.refresh();
+			// Update the table
+			functionsPanel.displayNewRow();
 		    }
 		}
 	    } else if(e.getActionCommand().equals("sine")) {
@@ -220,6 +222,8 @@ public class GrapherApplication {
 			// Add the function to the list and refresh
 			fnsdd.add(sineFunction);
 			graphPanel.refresh();
+			// Update the table
+			functionsPanel.displayNewRow();
 		    }
 		}
 		
@@ -231,12 +235,18 @@ public class GrapherApplication {
 			// Add the function to the list and refresh
 			fnsdd.add(quadFunction);
 			graphPanel.refresh();
+			// Update the table
+			functionsPanel.displayNewRow();
 		    }
 		}
 	    } else if(e.getActionCommand().equals("customQuad")) {
+		// If the user has clicked 'OK' on the pop up dialog
 		if(quadDialog.display() == true){
+		    // Use the user input to create new function, add to list, and refresh
 		    fnsdd.add(new FunctionR1R1DisplayData(quadDialog.inputCoeffs(), Color.CYAN));
 		    graphPanel.refresh();
+		    // Update the table
+		    functionsPanel.displayNewRow();
 		}
 	    }
 	}
