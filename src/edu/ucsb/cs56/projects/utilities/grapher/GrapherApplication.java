@@ -8,7 +8,8 @@ import javax.swing.event.*;
 /**
    Class to start the grapher utility
    @author Ryan Halbrook
-   @version CS56 Spring 2013
+   @author Jenny So
+   @version CS56 Winter 2014
 */
 public class GrapherApplication {
 
