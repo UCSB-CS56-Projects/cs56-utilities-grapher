@@ -1,0 +1,37 @@
+package edu.ucsb.cs56.projects.utilities.grapher;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertArrayEquals;
+
+public class ArbitraryFunctionTest {
+
+    @Test
+    public void testConstructor0(){
+	ArbitraryFunction p = new ArbitraryFunction("0", 'x');
+	assertEquals(new Term("0"),p.get(0));
+    }
+
+    @Test
+    public void testEvaluate0() {
+	ArbitraryFunction p = new ArbitraryFunction("3x^2", 'x');
+	assertEquals(12, (int)p.evaluate(2.0));
+    }
+
+    @Test
+    public void testEvaluate1() {
+	ArbitraryFunction p = new ArbitraryFunction("cos(x)", 'x');
+	assertEquals(-.42, p.evaluate(2.0));
+    }
+
+    @Test
+    public void testEvaluate2() {
+	ArbitraryFunction p = new ArbitraryFunction("sin(x)", 'x');
+	assertEquals(.91, p.evaluate(2.0));
+    }
+
+    @Test
+    public void testEvaluate3() {
+	ArbitraryFunction p = new ArbitraryFunction("3x^2 + cos(x)", 'x');
+	assertEquals(11.58, p.evaluate(2.0));
+    }
+}
