@@ -6,17 +6,19 @@ import java.awt.*;
 /**
 A widget that holds a list of functions.
 @author Ryan Halbrook
-@version CS56, S13, Project
+@author Jenny So
+@version CS56, W14, Project
 */
-public class FunctionsPanel extends JPanel {
+public class FunctionsPanel extends JPanel{
     private FunctionR1R1DisplayDataList list;
+    public JTable t = null;//public so we can update the table
 
     public FunctionsPanel(FunctionR1R1DisplayDataList list) {
 	super();
 	setBackground(Color.BLACK);
 	this.list = list;
 
-	JTable t = new JTable(new TableData(list));
+	t = new JTable(new TableData(list));
 	TableColumn c = null;
 	for (int i = 0; i < t.getColumnCount(); i++) {
 	    c = t.getColumnModel().getColumn(i);
@@ -28,6 +30,16 @@ public class FunctionsPanel extends JPanel {
 	JScrollPane sp = new JScrollPane(t);
 	sp.setPreferredSize(new Dimension(200,400));
 	this.add(sp);
+    }
+    /** 
+        Adds a row in the table display.
+    */
+    public void displayNewRow() {
+	// getModel returns as TableModel, so cast as TableData
+	TableData dataModel = (TableData)t.getModel();
+
+	// Notify the data model that a row has been inserted
+	dataModel.fireTableRowsInserted(list.size()-1, list.size()-1);
     }
 
     public class TableData extends AbstractTableModel {
@@ -47,5 +59,6 @@ public class FunctionsPanel extends JPanel {
 	    }
 	    return new Integer(row);
 	}
+	
     }
 }

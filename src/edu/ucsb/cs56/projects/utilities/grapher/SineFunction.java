@@ -26,7 +26,19 @@ public class SineFunction implements FunctionR1R1 {
 	return true;
     }
 
+    @Override
     public String toString() {
 	return "f(x)=sin(x)";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+	if(o == null)
+	    return false;
+	// Only depends on if it is a sine function
+	if(!(o instanceof SineFunction))
+	    return false;
+
+	return true;
     }
 }

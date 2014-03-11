@@ -26,7 +26,19 @@ public class QuadraticFunction implements FunctionR1R1 {
 	return true;
     }
 
+    @Override
     public String toString() {
 	return "f(x)=x^2";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+	if(o == null)
+	    return false;
+	// Only depends on if it is our predefined quadratic function
+	if(!(o instanceof QuadraticFunction))
+	    return false;
+
+	return true;
     }
 }

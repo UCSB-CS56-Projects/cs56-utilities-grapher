@@ -44,11 +44,11 @@ public class ArbitraryFunctionR1R1 implements FunctionR1R1 {
         System.out.println("About to render");
         String value = "";
         try {
-        ScriptEngineManager mgr = new ScriptEngineManager();
-        ScriptEngine eng = mgr.getEngineByName("JavaScript");
-        value = eng.eval(var + " = " + indVar + ", " + exp).toString();
+	    ScriptEngineManager mgr = new ScriptEngineManager();
+	    ScriptEngine eng = mgr.getEngineByName("JavaScript");
+	    value = eng.eval(var + " = " + indVar + ", " + exp).toString();
         
-        //System.out.println("Value of expression: "+value);
+	    //System.out.println("Value of expression: "+value);
         } catch (ScriptException e) {
             e.printStackTrace();
         }

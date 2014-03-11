@@ -74,4 +74,24 @@ public class FunctionR1R1DisplayData {
     public void setVisible(boolean visible) {
 	this.isVisible = visible;
     }
+
+    @Override
+    public boolean equals(Object o){
+	if(o == null)
+	    return false;
+	if(!(o instanceof FunctionR1R1DisplayData))
+	    return false;
+
+	FunctionR1R1DisplayData f = (FunctionR1R1DisplayData)o;
+	
+	//check color
+	if(!(this.graphColor.equals(f.graphColor)))
+	    return false;
+
+	//check function
+	if(!(this.function.equals(f.function)))
+	    return false;
+
+	return true;
+    }
 }

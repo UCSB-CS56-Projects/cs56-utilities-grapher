@@ -6,14 +6,14 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.border.*;
 import java.awt.event.*;
+//import java.lang.Math.*;
 /**
    A JPanel subclass that draws a function to the screen.
    @author Ryan Halbrook
    @version CS56, Spring 2013
  */
 public class Graph2DPanel extends JPanel implements ActionListener {
-    private ArrayList<FunctionR1R1DisplayData> functions
-	= new ArrayList<FunctionR1R1DisplayData>();
+    private ArrayList<FunctionR1R1DisplayData> functions = new ArrayList<FunctionR1R1DisplayData>();
     private FunctionR1R1DisplayDataList fnsdd;
     private Bounds2DFloat bounds;
 
@@ -100,15 +100,15 @@ public class Graph2DPanel extends JPanel implements ActionListener {
     private void drawAxes(Graphics g) {
 	
         float width = (float)this.getSize().getWidth();
-	    float height = (float)this.getSize().getHeight();
+	float height = (float)this.getSize().getHeight();
 	
-	    // Draw the x axis
-	    g.drawLine(0, (int)(height / 2)+ (int)bounds.getYMin(), (int)width, (int)(height / 2)+(int)bounds.getYMin());
+	// Draw the x axis
+	g.drawLine(0, (int)(height / 2)+ (int)bounds.getYMin(), (int)width, (int)(height / 2)+(int)bounds.getYMin());
 	
-	    // Draw the y axis
-	    /*
-	    g.drawLine(-(int)(width / 2 + (int)bounds.getXMin()), 0, (int)-(width / 2 + (int)bounds.getXMin()), (int)width);
-	    */
+	// Draw the y axis
+	//int xScale = (int)(width / (bounds.getXMax() - bounds.getXMin()));
+	//g.drawLine(-1*(int)bounds.getXMin()*(int)xScale, 0, -1*(int)bounds.getXMin()*(int)xScale, (int)height);
+
      }
     
         /**
@@ -116,13 +116,13 @@ public class Graph2DPanel extends JPanel implements ActionListener {
         */
     private void updatePaths() {
         double width = this.getSize().getWidth();
-	    double height = this.getSize().getHeight();
-	    int i = 0;
-	    for (FunctionR1R1DisplayData fdd : fnsdd) {
-	        fdd.buildPath(bounds, width, height);
-	        i++;
-	    }
-	    repaint();
+	double height = this.getSize().getHeight();
+	int i = 0;
+	for (FunctionR1R1DisplayData fdd : fnsdd) {
+	    fdd.buildPath(bounds, width, height);
+	    i++;
+	}
+	repaint();
     }
     
     /**
@@ -143,7 +143,7 @@ public class Graph2DPanel extends JPanel implements ActionListener {
                 prevX = e.getX();
                 prevY = e.getY();
             } else {
-            float xScale = (float)(getSize().getWidth() / (bounds.getXMax() - bounds.getXMin()));
+		float xScale = (float)(getSize().getWidth() / (bounds.getXMax() - bounds.getXMin()));
                 double deltaX = -((e.getX() - prevX) / xScale);
                 double deltaY = (e.getY() - prevY);
                 //if (deltaX < 1) deltaX = 0;

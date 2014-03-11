@@ -1,0 +1,18 @@
+package edu.ucsb.cs56.projects.utilities.grapher;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertArrayEquals;
+
+public class TermTest {
+    @Test
+    public void testTermConstructor() {
+	Term t = new Term("cos(x)");
+	assertEquals("cos(x)", t.toString());
+    }
+
+    @Test
+    public void testTermConstructor1() {
+	Term t = new Term("3x^2");
+	assertEquals("3x^2", t.toString());
+    }
+}

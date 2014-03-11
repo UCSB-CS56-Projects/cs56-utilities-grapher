@@ -1,0 +1,93 @@
+package edu.ucsb.cs56.projects.utilities.grapher;
+import java.util.*;
+import javax.script.*;
+import java.lang.Character;
+
+/** 
+    A class that represents a term in a function expression.
+    @author Jenny So
+    @version CS56, W14, Project
+*/
+public class Term extends ArrayList<FunctionR1R1> implements FunctionR1R1{
+
+    public int sign; //-1 or 1
+    public String exp; //string version of term
+
+    Term(String input){
+	//super(1);
+
+	this.sign = 1;
+	this.exp = input;
+
+	int i = 0;
+	    
+	/* How do we deal with paranthesis terms?
+	   if(input.substr(i,1).equals("(")){
+	   type = "p";
+	   i = 1;
+	   }
+	*/
+	
+	// Iterate through input string
+	while(i < input.length()) {
+
+	    // If a digit, we add a polynomial
+	    if(input.charAt(i) == 'x' || java.lang.Character.isDigit(input.charAt(i))) {
+
+		String poly = "";
+
+		// Build string to pass to constructor		
+		while(input.charAt(i)=='x' || input.charAt(i) == '^' || java.lang.Character.isDigit(input.charAt(i))) {
+		    poly += input.charAt(i);
+		    i++;
+
+		    if(i < input.length())
+			break;
+		}
+		
+		// Add a new CustomQuadraticFunction to the end of the list
+		this.add(new CustomQuadraticFunction(poly));
+	    }
+
+	    // Cosine function
+	    else if(i+3 < input.length() && input.substring(i,i+3).equals("cos")) {
+		this.add(new CosineFunction());
+		i += 6;
+	    }
+
+	    // Sine function
+	    else if(i+3 < input.length() && input.substring(i,i+3).equals("sin")) {
+		this.add(new SineFunction());
+		i += 6;
+	    }
+
+	    // If there is a multiplication sign, we need to add another function to the list
+	    else if(input.substring(i,i+1).equals("*"))
+		i++;
+	}
+    }
+
+    public void toNegative(){
+	this.sign = -1;
+    }
+
+    public double evaluate(double indVar) {
+	// Multiply each function in term list together
+	double product = 1;
+
+	for(int i =0; i<this.size(); i++)
+	    product *= this.get(i).evaluate(indVar);
+
+	product *= sign;
+	return product;
+    }
+
+    public boolean isInDomain(double arg) {
+	return true;
+    }
+
+    public String toString() {
+	return exp;
+    }
+}
+
