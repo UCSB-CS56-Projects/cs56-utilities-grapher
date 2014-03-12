@@ -23,7 +23,21 @@ public class CustomQuadraticFunctionTest{
 	assertEquals(1, (int)p.get(1));
 	assertEquals(5, (int)p.get(0));
     }
+    /**
+       Test constructor that initializes from a String
+       @see CustomQuadraticFunction#CustomQuadraticFunction(String)
+    */
+    @Test public void testConstructorString() {
+	CustomQuadraticFunction p = new CustomQuadraticFunction("3x^3 + 4x^2 + 5x + 6");
+	CustomQuadraticFunction a = new CustomQuadraticFunction(new int[] {6,5,4,3});
+	assertEquals(p,a);
+    }
 
+    @Test public void testConstructorString2() {
+	CustomQuadraticFunction p = new CustomQuadraticFunction("3x^2");
+	CustomQuadraticFunction a = new CustomQuadraticFunction(new int[] {0,0,3});
+	assertEquals(p,a);
+    }
      /**
         Test evaluate method that evaluates using an independent variable
 	In this case, independent variable is 0
