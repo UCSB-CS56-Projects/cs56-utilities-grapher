@@ -60,6 +60,6 @@ public class ArbitraryFunctionDialog {
 	// Return new function using textfield text
 	String input = textField.getText();
 
-        return(new ArbitraryFunction(input));
+        return(new ArbitraryFunction(input, 'x'));
     }
 }

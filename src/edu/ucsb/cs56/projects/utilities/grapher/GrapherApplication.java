@@ -17,6 +17,7 @@ public class GrapherApplication {
     public static final int WIDTH = 750;
     public static final int HEIGHT = 480;
     public CustomQuadraticDialog quadDialog = null;
+    public ArbitraryFunctionDialog arbiDialog = null;
     public JMenuBar mb = null;
     public Bounds2DFloat b = null;
     public Graph2DPanel graphPanel = null;
@@ -62,7 +63,8 @@ public class GrapherApplication {
 	appFrame.setVisible(true);
 
 	// Create the dialog that will pop up when selected in menu bar. 6 is the maximum power polynomial minus 1.
-	quadDialog = new CustomQuadraticDialog(6);	
+	quadDialog = new CustomQuadraticDialog(6);
+	arbiDialog = new ArbitraryFunctionDialog();
     }
 
     /**
@@ -122,24 +124,28 @@ public class GrapherApplication {
 	JMenuItem sine = new JMenuItem("Sine");
 	JMenuItem quadratic = new JMenuItem("x^2");
 	JMenuItem customQuad = new JMenuItem("Custom Quadratic");
+	JMenuItem arbiFunc = new JMenuItem("Arbitrary Function");
 
 	// Set commands
 	cosine.setActionCommand("cosine");
 	sine.setActionCommand("sine");
 	quadratic.setActionCommand("quadratic");
 	customQuad.setActionCommand("customQuad");
+	arbiFunc.setActionCommand("arbiFunc");
 
 	// Add listener to buttons
 	cosine.addActionListener(new ButtonListener());
 	sine.addActionListener(new ButtonListener());
 	quadratic.addActionListener(new ButtonListener());
 	customQuad.addActionListener(new ButtonListener());
+	arbiFunc.addActionListener(new ButtonListener());
 	
 	// Add buttons to the functions options
 	functionsOp.add(cosine);
 	functionsOp.add(sine);
 	functionsOp.add(quadratic);
 	functionsOp.add(customQuad);
+	functionsOp.add(arbiFunc);
 
 	// Add all option links to the bar
 	mb.add(scaleOp);
@@ -245,6 +251,15 @@ public class GrapherApplication {
 		if(quadDialog.display() == true){
 		    // Use the user input to create new function, add to list, and refresh
 		    fnsdd.add(new FunctionR1R1DisplayData(quadDialog.inputCoeffs(), Color.CYAN));
+		    graphPanel.refresh();
+		    // Update the table
+		    functionsPanel.displayNewRow();
+		}
+	    } else if(e.getActionCommand().equals("arbiFunc")) {
+		// If the user has clicked 'OK' on the pop up dialog
+		if(arbiDialog.display() == true){
+		    // Use user input to create new function, add to list, and refresh
+		    fnsdd.add(new FunctionR1R1DisplayData(arbiDialog.inputFunction(), Color.RED));
 		    graphPanel.refresh();
 		    // Update the table
 		    functionsPanel.displayNewRow();
