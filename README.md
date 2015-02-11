@@ -1,9 +1,7 @@
 cs56-utilities-grapher
 ======================
 
-W14 Ready! (Brynn Kiefer)
-
-A 2D graphing GUI
+(W15) TBD: Good project but it needs more issues for students to work on. But most of the issues I can think of (such as adding parenthesis evaluation for arbitrary expressions) are difficult beyond the scope of a CS 56 project. (David Coffill)
 
 
 project history
