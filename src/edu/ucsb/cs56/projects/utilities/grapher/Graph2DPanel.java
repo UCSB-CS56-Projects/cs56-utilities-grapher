@@ -39,6 +39,7 @@ public class Graph2DPanel extends JPanel implements ActionListener {
      */
     public Graph2DPanel(FunctionR1R1 function, Bounds2DFloat b, FunctionR1R1DisplayDataList fnsdd) {
 	super();
+	System.out.println("hi im a pninadf");
 	this.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
 	this.fnsdd = fnsdd; 
 	functions.add(new FunctionR1R1DisplayData(function, Color.GREEN));
@@ -134,6 +135,7 @@ public class Graph2DPanel extends JPanel implements ActionListener {
     }
     
     public class MouseResponder extends MouseAdapter {
+	public static final float SCALE_FACTOR_PER_WHEEL_NOTCH=0.8f;
         double prevX = -1;
         double prevY = -1;
         private boolean controlHeld = false;
@@ -154,6 +156,13 @@ public class Graph2DPanel extends JPanel implements ActionListener {
         public void mousePressed(MouseEvent e) {
             prevX = e.getX(); prevY = e.getY();
         }
+	@Override
+	public void mouseWheelMoved(MouseWheelEvent e){
+		int notches=e.getWheelRotation();
+		System.out.println("hi the mouse wheel moved");
+		float finalScaleFactor=(float)Math.pow(SCALE_FACTOR_PER_WHEEL_NOTCH,(double)notches);
+		bounds.scale(finalScaleFactor);
+	}
     }
 
 }
