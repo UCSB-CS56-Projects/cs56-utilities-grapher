@@ -134,10 +134,12 @@ public class Graph2DPanel extends JPanel implements ActionListener {
     }
     
     public class MouseResponder extends MouseAdapter {
+	public static final float SCALE_FACTOR_PER_WHEEL_NOTCH=0.8f;
+
         double prevX = -1;
         double prevY = -1;
         private boolean controlHeld = false;
-        
+
         public void mouseDragged(MouseEvent e) {
             if (prevY == -1) {
                 prevX = e.getX();
@@ -154,6 +156,14 @@ public class Graph2DPanel extends JPanel implements ActionListener {
         public void mousePressed(MouseEvent e) {
             prevX = e.getX(); prevY = e.getY();
         }
+	 @Override
+        public void mouseWheelMoved(MouseWheelEvent e){
+                int notches=e.getWheelRotation();
+                System.out.println("hi the mouse wheel moved");
+                float finalScaleFactor=(float)Math.pow(SCALE_FACTOR_PER_WHEEL_NOTCH,(double)notches);
+                bounds.scale(finalScaleFactor);
+        }
+
     }
 
 }
