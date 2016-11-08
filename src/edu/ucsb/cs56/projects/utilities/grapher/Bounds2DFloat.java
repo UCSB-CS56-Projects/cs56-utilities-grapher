@@ -35,10 +35,18 @@ public class Bounds2DFloat {
        @param factor the factor to scale the bounds.
      */
     public void scale(float factor) {
-	xMin /= factor;
-	yMin /= factor;
-	xMax /= factor;
-	yMax /= factor;
+        float width=xMax-xMin;
+        float height=yMax-yMin;
+        float translationFactor=(1.0f/factor-1.0f)/2;
+        xMin-=translationFactor*(width);
+        xMax+=translationFactor*(width);
+        yMin-=translationFactor*(height);
+        yMax+=translationFactor*(height);
+//      xMin /= factor;
+//      yMin /= factor;
+//      xMax /= factor;
+//      yMax /= factor;
+	
 	sendEvents();
     }
 
