@@ -47,7 +47,6 @@ public class Graph2DPanel extends JPanel implements ActionListener {
 	this.addMouseListener(mr);
 	this.addMouseMotionListener(mr);
 	this.addMouseWheelListener(mr);
-	//JButton origin=new JButton("Origin");
 	setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	
 	if(this.bounds == null) {
@@ -157,10 +156,17 @@ public class Graph2DPanel extends JPanel implements ActionListener {
             }
 	   }
         }
+	
+	/**
+		Different operations for different types of mouse presses
+	*/
         public void mousePressed(MouseEvent e) {
+		
+	    //Sets values of prevX and prevY for use with the mouseDragged method if left mouse key is pressed
             if(e.getButton() == MouseEvent.BUTTON1)
 		prevX = e.getX(); prevY = e.getY();
 
+	    // AB, HW Centers and zooms in on point of the graph clicked with a right mouse click
 	    if(e.getButton() == MouseEvent.BUTTON3)
 	    {
 		float width=(float)getSize().getWidth();
@@ -173,9 +179,16 @@ public class Graph2DPanel extends JPanel implements ActionListener {
 		bounds.scale(SCALE_FACTOR_ON_RIGHT_CLICK);
 	    }
         }
+	    
+	/**
+		HW, AB Causes graph to zoom in and out when mouse wheel is scrolled.
+	*/
 	@Override
-        public void mouseWheelMoved(MouseWheelEvent e){
+        public void mouseWheelMoved(MouseWheelEvent e)
+	{
+		// Gets notches scrolled
                 int notches=e.getWheelRotation();
+		// Scales graph relative to number of notches scrolled
                 float finalScaleFactor=(float)Math.pow(SCALE_FACTOR_PER_WHEEL_NOTCH,(double)notches);
                 bounds.scale(finalScaleFactor);
 
