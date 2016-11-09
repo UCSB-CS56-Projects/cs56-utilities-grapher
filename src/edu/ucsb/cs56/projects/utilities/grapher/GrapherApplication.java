@@ -35,7 +35,7 @@ public class GrapherApplication {
 	appFrame.setSize(WIDTH, HEIGHT);
 	
 	// Set bounds for graph
-	b = new Bounds2DFloat(-10, -10, 10, 10);//x1 y1 x2 y2
+	b = new Bounds2DFloat(-10, -10, 10, 10);//x1 y1 x2 y2 HW,AB Reset defualt window
 
 	// Create panel for graph that will draw functions
 	graphPanel = new Graph2DPanel(new SineFunction(),b, fnsdd);
@@ -56,9 +56,12 @@ public class GrapherApplication {
 	JSlider zoomSlider = new JSlider(JSlider.HORIZONTAL, -15, 15, 0);
 	zoomSlider.addChangeListener(new SliderListener());
 	graphPanel.add(zoomSlider);
+	    
+	// HW, AB creates origin button that when pressed resets view to default view.
 	JButton origin=new JButton("Origin");
 	origin.addActionListener(new OriginListener());
 	graphPanel.add(origin);
+	    
 	buildMenuBar();
 
 	appFrame.setJMenuBar(mb);
@@ -154,6 +157,10 @@ public class GrapherApplication {
 	mb.add(translateOp);
 	mb.add(functionsOp);
     }
+	
+    /**
+    	HW, AB Listener class for Origin button
+    */
     public class OriginListener implements ActionListener{
 	public void actionPerformed(ActionEvent a){
 	    b.setXMin(-10.0f);
