@@ -42,11 +42,7 @@ public class Bounds2DFloat {
         xMax+=translationFactor*(width);
         yMin-=translationFactor*(height);
         yMax+=translationFactor*(height);
-//      xMin /= factor;
-//      yMin /= factor;
-//      xMax /= factor;
-//      yMax /= factor;
-	
+
 	sendEvents();
     }
 
