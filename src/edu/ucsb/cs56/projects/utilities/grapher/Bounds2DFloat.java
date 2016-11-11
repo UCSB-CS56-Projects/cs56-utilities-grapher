@@ -8,10 +8,10 @@ import java.awt.event.*;
    @version CS56, S13, Project
  */
 public class Bounds2DFloat {
-    private float xMin = 10.0f;
-    private float xMax = 10.0f;
-    private float yMin = 10.0f;
-    private float yMax = 10.0f;
+    private float xMin = 0.0f;
+    private float xMax = 0.0f;
+    private float yMin = 0.0f;
+    private float yMax = 0.0f;
     
     private ArrayList<ActionListener> listeners;
 
@@ -35,10 +35,14 @@ public class Bounds2DFloat {
        @param factor the factor to scale the bounds.
      */
     public void scale(float factor) {
-	xMin /= factor;
-	yMin /= factor;
-	xMax /= factor;
-	yMax /= factor;
+        float width=xMax-xMin;
+        float height=yMax-yMin;
+        float translationFactor=(1.0f/factor-1.0f)/2;
+        xMin-=translationFactor*(width);
+        xMax+=translationFactor*(width);
+        yMin-=translationFactor*(height);
+        yMax+=translationFactor*(height);
+
 	sendEvents();
     }
 
