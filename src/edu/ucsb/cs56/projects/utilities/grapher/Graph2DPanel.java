@@ -47,7 +47,7 @@ public class Graph2DPanel extends JPanel implements ActionListener {
 	MouseResponder mr = new MouseResponder();
 	this.addMouseListener(mr);
 	this.addMouseMotionListener(mr);
-	
+	this.addMouseWheelListener(mr);
 	setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	
 	if(this.bounds == null) {
@@ -136,11 +136,14 @@ public class Graph2DPanel extends JPanel implements ActionListener {
     
     public class MouseResponder extends MouseAdapter {
 	public static final float SCALE_FACTOR_PER_WHEEL_NOTCH=0.8f;
+	public static final float SCALE_FACTOR_ON_RIGHT_CLICK=1.25f;
         double prevX = -1;
         double prevY = -1;
         private boolean controlHeld = false;
-        
+
         public void mouseDragged(MouseEvent e) {
+          if(e.getButton() == MouseEvent.BUTTON1)
+	  {
             if (prevY == -1) {
                 prevX = e.getX();
                 prevY = e.getY();
@@ -152,17 +155,48 @@ public class Graph2DPanel extends JPanel implements ActionListener {
                 bounds.translate(deltaX, deltaY);
                 prevX = e.getX(); prevY = e.getY();
             }
+	   }
         }
+	
+	/**
+		Different operations for different types of mouse presses
+	*/
         public void mousePressed(MouseEvent e) {
-            prevX = e.getX(); prevY = e.getY();
+		
+	    //Sets values of prevX and prevY for use with the mouseDragged method if left mouse key is pressed
+            if(e.getButton() == MouseEvent.BUTTON1)
+		prevX = e.getX(); prevY = e.getY();
+
+	    // AB, HW Centers and zooms in on point of the graph clicked with a right mouse click
+	    if(e.getButton() == MouseEvent.BUTTON3)
+	    {
+		float width=(float)getSize().getWidth();
+		float height=(float)getSize().getHeight();
+		float newCenterX=bounds.getXMin()+(((float)e.getX())/width)*(bounds.getXMax()-bounds.getXMin());
+		float newCenterY=bounds.getYMin()+(((float)e.getY())/height)*(bounds.getYMax()-bounds.getYMin());
+		float centerX=(bounds.getXMin()+bounds.getXMax())/2.0f;
+		float centerY=(bounds.getYMin()+bounds.getYMax())/2.0f;
+		bounds.translate(newCenterX-centerX,newCenterY-centerY);
+		bounds.scale(SCALE_FACTOR_ON_RIGHT_CLICK);
+	    }
         }
+
+	    
+	/**
+		HW, AB Causes graph to zoom in and out when mouse wheel is scrolled.
+	*/
 	@Override
-	public void mouseWheelMoved(MouseWheelEvent e){
-		int notches=e.getWheelRotation();
-		System.out.println("hi the mouse wheel moved");
-		float finalScaleFactor=(float)Math.pow(SCALE_FACTOR_PER_WHEEL_NOTCH,(double)notches);
-		bounds.scale(finalScaleFactor);
-	}
+        public void mouseWheelMoved(MouseWheelEvent e)
+	{
+		// Gets notches scrolled
+                int notches=e.getWheelRotation();
+		// Scales graph relative to number of notches scrolled
+                float finalScaleFactor=(float)Math.pow(SCALE_FACTOR_PER_WHEEL_NOTCH,(double)notches);
+                bounds.scale(finalScaleFactor);
+
+        }
+
+
     }
 
 }
