@@ -56,9 +56,7 @@ public class GrapherApplication {
 	appFrame.getContentPane().add(mainPanel);
 	//appFrame.getContentPane().setBorder(BorderFactory.createLineBorder(Color.BLACK));
 	createGraphPanelWidgets();
-	    
 	buildMenuBar();
-
 	appFrame.setJMenuBar(mb);
 	appFrame.setVisible(true);
 
@@ -75,6 +73,9 @@ public class GrapherApplication {
 	GrapherApplication application = new GrapherApplication();
 	application.start();
     }
+    /**
+	Creates the slider and the origin button here
+    */
     public void createGraphPanelWidgets(){
 	// Create JSlider that spans from -15 to 15. Default value is 0.
 	JSlider zoomSlider = new JSlider(JSlider.HORIZONTAL, -15, 15, 0);

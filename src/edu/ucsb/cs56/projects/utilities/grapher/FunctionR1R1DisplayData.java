@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.geom.*;
 
 /**
+   Displays the data on the graph.
    @author Ryan Halbrook
    @version CS56, Spring 13, Project
  */
