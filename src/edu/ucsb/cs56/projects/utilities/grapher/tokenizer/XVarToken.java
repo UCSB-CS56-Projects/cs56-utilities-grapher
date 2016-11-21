@@ -1,6 +1,6 @@
 package edu.ucsb.cs56.projects.utilities.grapher.tokenizer;
 
-public class XVarToken extends Token{
+public class XVarToken extends Token implements Variable{
         @Override
         public double getPrecedence(){
                 return 0.0;

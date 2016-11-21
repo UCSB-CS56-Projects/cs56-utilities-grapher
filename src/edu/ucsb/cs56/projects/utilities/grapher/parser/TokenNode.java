@@ -4,30 +4,22 @@ import edu.ucsb.cs56.projects.utilities.grapher.tokenizer.Token;
 
 public class TokenNode extends Token{
 
-    public static final int IS_LITERAL = 0;
-    public static final int IS_UN_OP = 1;
-    public static final int IS_BIN_OP = 2;
-
     private Token data;
     private TokenNode leftChild;
     private TokenNode rightChild;
-    private int type;
 
     public TokenNode(Token data, TokenNode leftChild, TokenNode rightChild){
 	this.data = data;
 	this.leftChild = leftChild;
 	this.rightChild = rightChild;
-	this.type = TokenNode.IS_BIN_OP;
     }
 
     public TokenNode(Token data, TokenNode leftChild){
 	this(data, leftChild, null);
-	this.type = TokenNode.IS_UN_OP;
     }
 
     public TokenNode(Token data){
 	this(data, null, null);
-	this.type = TokenNode.IS_LITERAL;
     }
 
     @Override
@@ -65,21 +57,15 @@ public class TokenNode extends Token{
     }
 
     public boolean isLiteral(){
-	if (type == TokenNode.IS_LITERAL)
-		return true;
-	return false;
+	return leftChild==null&&rightChild==null;
    }
 
     public boolean isUnaryOperator(){
-	if (type == TokenNode.IS_UN_OP)
-		return true;
-	return false;
+	return !isLiteral()&&!isBinaryOperator();
    }
 
     public boolean isBinaryOperator(){
-	if (type == TokenNode.IS_BIN_OP)
-		return true;
-	return false;
+	return leftChild!=null&&rightChild!=null;
    }
     public Token getData(){
 	return data;
@@ -87,7 +73,16 @@ public class TokenNode extends Token{
     public TokenNode getLeftChild(){
 	return leftChild;
     }
-    public TokenNode.getRightChild(){
+    public TokenNode getRightChild(){
 	return rightChild;
+    }
+    public void printNode(){
+	System.out.println(this.data);
+	//System.out.println(this.getLeftChild().getData());
+	if (this.leftChild!=null)
+	    this.getLeftChild().printNode();
+	if (this.rightChild!=null)
+	    this.getRightChild().printNode();
+	return;
     }
 }

@@ -5,5 +5,9 @@ public class ErrorToken extends Token{
         public String repr(){
             return "ERROR TOKEN";
         }
+	@Override
+	public double getPrecedence(){
+		return 0;
+	}
 }
 

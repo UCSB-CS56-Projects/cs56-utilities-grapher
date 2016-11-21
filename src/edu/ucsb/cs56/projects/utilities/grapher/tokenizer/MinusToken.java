@@ -1,6 +1,6 @@
 package edu.ucsb.cs56.projects.utilities.grapher.tokenizer;
 
-public class MinusToken extends Token{
+public class MinusToken extends Token implements Binop{
         @Override
         public double getPrecedence(){
                 return 5;

@@ -15,6 +15,10 @@ public class NumberToken extends Token{
 	    return String.valueOf(value);
 	}
 	@Override
+	public String toString(){
+		return super.toString()+"("+value+")";
+	}
+	@Override
 	public boolean equals(Object o){
 	    if(o==null)return false;
 	    if(o.getClass()!=getClass())return false;

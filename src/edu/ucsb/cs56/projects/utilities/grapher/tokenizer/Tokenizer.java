@@ -124,7 +124,7 @@ public class Tokenizer{
 			    if(c2=='.'){
 				hasPassedPeriod=true;
 				continue;
-			    }
+			    }else if(c2>'9'||c2<'0')continue;
 			    double digit=(double)(c2-'0');
 			    if(!hasPassedPeriod)tokenValueIntegerPart=tokenValueIntegerPart*10.0+digit;
 			    else tokenValueFractionalPart=tokenValueFractionalPart*10.0+digit;
@@ -140,7 +140,7 @@ public class Tokenizer{
 		    currentState=getDefaultState();
 		    endIndexOfLastToken=i-1;
 		    if(!Character.isWhitespace(c))i--;
-		}else{
+		}else if(!Character.isWhitespace(c)){
 		    tokens.add(new ErrorToken());
 		}
 	    }
