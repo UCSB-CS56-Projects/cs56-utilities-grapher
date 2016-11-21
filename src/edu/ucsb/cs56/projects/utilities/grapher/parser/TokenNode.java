@@ -41,24 +41,43 @@ public class TokenNode extends Token{
     }
 
     @Override
+    public boolean equals(Object o){
+	if (o == null)
+		return false;
+	if (o.getClass() != this.getClass())
+		return false;
+	TokenNode t = (TokenNode) o;
+	if (!this.data.equals(t.data))
+		return false;
+	if (this.leftChild!=null){
+		if(!this.leftChild.equals(t.leftChild))return false;
+	}else if(t.leftChild!=null)return false;
+
+	if(this.rightChild!=null){
+		if(!this.rightChild.equals(t.rightChild))return false;
+	}else if(t.rightChild!=null)return false;
+
+	return true;
+}
+    @Override
     public double getPrecedence(){
         return 0;
     }
 
     public boolean isLiteral(){
-	if (type == TokenNode.IS_LITERAL))
+	if (type == TokenNode.IS_LITERAL)
 		return true;
 	return false;
    }
 
     public boolean isUnaryOperator(){
-	if (type == TokenNode.IS_UN_OP))
+	if (type == TokenNode.IS_UN_OP)
 		return true;
 	return false;
    }
 
     public boolean isBinaryOperator(){
-	if (type == TokenNode.IS_BIN_OP))
+	if (type == TokenNode.IS_BIN_OP)
 		return true;
 	return false;
    }

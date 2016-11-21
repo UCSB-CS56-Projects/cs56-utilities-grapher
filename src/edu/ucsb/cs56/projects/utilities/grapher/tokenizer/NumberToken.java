@@ -23,4 +23,6 @@ public class NumberToken extends Token{
 	    return (ratioOfValues<1.0+DELTA&&ratioOfValues>1.0-DELTA);
 	}
 	public double getValue(){return value;}
+	@Override
+	public double getPrecedence(){return 0;}
 }
