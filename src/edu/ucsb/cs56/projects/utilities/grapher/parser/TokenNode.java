@@ -81,5 +81,13 @@ public class TokenNode extends Token{
 		return true;
 	return false;
    }
-
+    public Token getData(){
+	return data;
+    }
+    public TokenNode getLeftChild(){
+	return leftChild;
+    }
+    public TokenNode.getRightChild(){
+	return rightChild;
+    }
 }
