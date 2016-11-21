@@ -1,10 +1,10 @@
 package edu.ucsb.cs56.projects.utilities.grapher.tokenizer;
 
-public class VarToken extends Token{
+public class TVarToken extends Token{
 
 	@Override
         public String repr(){
-            return "x";
+            return "t";
         }
 }
 

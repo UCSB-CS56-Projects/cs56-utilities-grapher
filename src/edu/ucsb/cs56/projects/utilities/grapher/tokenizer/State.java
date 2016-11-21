@@ -36,7 +36,9 @@ public class State{
 	public void addNextState(char c, int next){nextState.put(c,next);}
 	public HashMap<Character,Integer> getNextState(){return nextState;}
 	public Token getAssociatedToken(){return associatedToken;}
+	public void setAssociatedToken(Token t){associatedToken=t;}
 	public boolean stateIsTerminating(){return isTerminatingState;}
+	public void setIsTerminatingState(boolean b){isTerminatingState=b;}
 	public char[] getAssociatedCharacters(){return associatedChars;}
 	@Override
 	public String toString(){

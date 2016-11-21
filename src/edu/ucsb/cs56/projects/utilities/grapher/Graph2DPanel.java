@@ -19,7 +19,7 @@ public class Graph2DPanel extends JPanel implements ActionListener {
 
     private Color background = Color.BLACK;
     private Color foreground = Color.WHITE;
-    
+   
     // Used to only redraw the graph if necessary.
     private boolean graphIsValid = false;
     // A path of the graph that can be drawn
@@ -142,6 +142,7 @@ public class Graph2DPanel extends JPanel implements ActionListener {
         private boolean controlHeld = false;
 
         public void mouseDragged(MouseEvent e) {
+	    
           if(e.getButton() == MouseEvent.BUTTON1)
 	  {
             if (prevY == -1) {

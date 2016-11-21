@@ -6,16 +6,19 @@ import java.util.ArrayList;
 import org.junit.Before;
 public class TokenTest {
     Tokenizer k;
+
     @Before
     public void setUp(){
 	k=new Tokenizer();
     }
+
     @Test
     public void testCosine() {
 	ArrayList<Token>tokens=k.tokenize("cos");
 	assertEquals(tokens.size(),1);
 	assertEquals(tokens.get(0),new CosineToken());	
     }
+
     @Test
     public void testNestedSineCosine(){
 	ArrayList<Token> tokens=k.tokenize("sincossin");
@@ -24,24 +27,27 @@ public class TokenTest {
 	tA=tokens.toArray(tA);
 	assertEquals(tA,answer);
     }
+
     @Test
     public void testIntegers(){
 	ArrayList<Token>tokens=k.tokenize("2sincosx+4x^2+5");
-	Token[]answer={new NumberToken(2.0),new SineToken(),new CosineToken(),new VarToken(),new PlusToken(),new NumberToken(4.0),
-		new VarToken(),new ExponentToken(),new NumberToken(2.0), new PlusToken(),new NumberToken(5.0)};
+	Token[]answer={new NumberToken(2.0),new SineToken(),new CosineToken(),new XVarToken(),new PlusToken(),new NumberToken(4.0),
+		new XVarToken(),new ExponentToken(),new NumberToken(2.0), new PlusToken(),new NumberToken(5.0)};
 	Token[]tA=new Token[tokens.size()];
 	tA=tokens.toArray(tA);
 	assertEquals(tA,answer);
     }
+
     @Test
     public void testBigIntegers(){
 	ArrayList<Token>tokens=k.tokenize("cos32234x+12logx^54");
-	Token[]answer={new CosineToken(),new NumberToken(32234.0),new VarToken(), new PlusToken(), new NumberToken(12.0),
-		new LogToken(),new VarToken(), new ExponentToken(), new NumberToken(54)};
+	Token[]answer={new CosineToken(),new NumberToken(32234.0),new XVarToken(), new PlusToken(), new NumberToken(12.0),
+		new LogToken(),new XVarToken(), new ExponentToken(), new NumberToken(54)};
 	Token[]tA=new Token[tokens.size()];
 	tA=tokens.toArray(tA);
 	assertEquals(tA,answer);   
     }
+
     @Test
     public void testNumbers(){
 	ArrayList<Token>tokens=k.tokenize("4235.324*533.31455/23443.12");
@@ -51,4 +57,32 @@ public class TokenTest {
 	tA=tokens.toArray(tA);
 	assertEquals(tA,answer);   
     }
+
+   @Test
+   public void testLogAndNaturalLog(){
+	ArrayList<Token> tokens = k.tokenize("log(10)*ln(1)");
+	Token[] answer = {new LogToken(),
+			  new LParenToken(),
+			  new NumberToken(10), new RParenToken(),
+			  new TimesToken(),
+			  new NaturalLogToken(),
+			  new LParenToken(), new NumberToken(1),
+			  new RParenToken()};
+	Token[] tA = new Token[tokens.size()];
+	tA = tokens.toArray(tA);
+	assertEquals(tA,answer);
+   }
+
+   @Test
+   public void testTangentAndConsecutiveVariables(){
+	ArrayList<Token> tokens = k.tokenize("tan(txy)");
+	Token[] answer = {new TangentToken(), new LParenToken(),
+			  new TVarToken(), new XVarToken(),
+			  new YVarToken(), new RParenToken()};
+	Token[] tA = new Token[tokens.size()];
+	tA = tokens.toArray(tA);
+	System.out.println(tokens);
+	assertEquals(tA,answer);
+   }
+
 }
