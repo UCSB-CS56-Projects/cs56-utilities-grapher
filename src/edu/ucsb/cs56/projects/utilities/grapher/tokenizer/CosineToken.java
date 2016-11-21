@@ -5,6 +5,12 @@ public class CosineToken extends Token{
         public String repr(){
 	    return "cos";
         }
+
+        @Override
+        public double getPrecedence(){
+                return 3;
+        }
+
 }
 
 

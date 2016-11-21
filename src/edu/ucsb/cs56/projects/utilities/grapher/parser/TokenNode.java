@@ -34,14 +34,17 @@ public class TokenNode extends Token{
     public String repr(){
 	return null;
     }
+
     @Override
     public String toString(){
 	return "TokenNode";
     }
+
     @Override
-    public int getPrecedence(){
-	return 0;
+    public double getPrecedence(){
+        return 0;
     }
+
     public boolean isLiteral(){
 	if (type == TokenNode.IS_LITERAL))
 		return true;

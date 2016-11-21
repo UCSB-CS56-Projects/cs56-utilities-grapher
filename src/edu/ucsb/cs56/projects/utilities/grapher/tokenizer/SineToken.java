@@ -5,4 +5,10 @@ public class SineToken extends Token{
         public String repr(){
 	    return "sin";
         }
+
+        @Override
+        public double getPrecedence(){
+                return 3;
+        }
+
 }

@@ -3,6 +3,7 @@ package edu.ucsb.cs56.projects.utilities.grapher.tokenizer;
 public abstract class Token{
 
 	public abstract String repr();
+	public abstract double getPrecedence();
 
 	@Override
 	public String toString(){

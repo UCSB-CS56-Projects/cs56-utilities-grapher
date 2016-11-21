@@ -5,5 +5,11 @@ public class NaturalLogToken extends Token{
         public String repr(){
             return "ln";
         }
+
+        @Override
+        public double getPrecedence(){
+                return 3;
+        }
+
 }
 

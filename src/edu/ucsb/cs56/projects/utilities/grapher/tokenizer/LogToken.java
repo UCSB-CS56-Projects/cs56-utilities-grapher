@@ -6,6 +6,12 @@ public class LogToken extends Token{
         public String repr(){
 	    return "log";
         }
+
+        @Override
+        public double getPrecedence(){
+                return 3;
+        }
+
 }
 
 
