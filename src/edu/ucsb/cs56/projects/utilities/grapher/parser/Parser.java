@@ -29,7 +29,6 @@ public class Parser{
 		if ((input.get(i) instanceof NumberToken || input.get(i) instanceof Variable)&& input.get(i-1) instanceof RParenToken)
 			input.add(i,new TimesToken());		
 	    }
-		System.out.println(input);
 	        int parenCheck = 0;
 		ArrayList<Integer>lParenIndices=new ArrayList<Integer>();
 		ArrayList<Integer>rParenIndices=new ArrayList<Integer>();
@@ -89,16 +88,9 @@ public class Parser{
 		}
 		//		System.out.println("rigahgiuitHighestPrecenedence"+rightHighestPrecedenceIndex);
 		//	System.out.println("arorjkaro"+rightHighestPrecedence);
-		System.out.println("right"+rightHighestPrecedenceIndex);
-		System.out.println("left"+leftHighestPrecedenceIndex);
-		System.out.println("rightPrecedence"+rightHighestPrecedence);
-		System.out.println("leftPrecedence"+leftHighestPrecedence);
-		System.out.println(new CosineToken().getPrecedence());
 		if(rightHighestPrecedence>(new CosineToken()).getPrecedence())
        		    rightHighestPrecedenceIndex = leftHighestPrecedenceIndex;
 
-		System.out.println("right"+rightHighestPrecedenceIndex);
-		System.out.println("left"+leftHighestPrecedenceIndex);
 		if(rightHighestPrecedenceIndex == -1){
 		    if(newArr.size()==1 && newArr.get(0) instanceof TokenNode)
 			break;
