@@ -238,7 +238,7 @@ public class GrapherApplication {
 				// If the user has clicked 'OK' on the pop up dialog
 		if(arbiDialog.display() == true){
 		    // Use user input to create new function, add to list, and refresh
-		    fnsdd.add(new FunctionR1R1DisplayData(arbiDialog.inputFunction(), Color.RED));
+		    fnsdd.add(new FunctionR1R1DisplayData(new CustomFunction(arbiDialog.getText()), Color.RED));
 		    graphPanel.refresh(); // Update the table
 		    functionsPanel.displayNewRow();
 		}

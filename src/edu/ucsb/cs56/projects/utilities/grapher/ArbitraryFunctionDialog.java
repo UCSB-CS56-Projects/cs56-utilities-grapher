@@ -62,4 +62,7 @@ public class ArbitraryFunctionDialog {
 
         return(new ArbitraryFunction(input, 'x'));
     }
+    public String getText(){
+	return textField.getText();
+    }
 }

@@ -13,7 +13,7 @@ public interface FunctionR1R1 {
        @return the value of the function evaluated
        with the independent variable.
      */
-    public double evaluate(double indVar);
+    public double evaluate(double indVar)throws Exception;
 
     /**
       Checks if an argument is in the domain of the function.
