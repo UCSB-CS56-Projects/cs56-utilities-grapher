@@ -39,7 +39,6 @@ public class Graph2DPanel extends JPanel implements ActionListener {
      */
     public Graph2DPanel(FunctionR1R1 function, Bounds2DFloat b, FunctionR1R1DisplayDataList fnsdd) {
 	super();
-	System.out.println("hi im a pninadf");
 	this.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
 	this.fnsdd = fnsdd; 
 	functions.add(new FunctionR1R1DisplayData(function, Color.GREEN));

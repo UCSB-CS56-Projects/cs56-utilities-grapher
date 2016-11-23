@@ -99,7 +99,6 @@ public class CustomQuadraticDialog {
 		break;
 	}
 	if(result.equals(""))result="0";
-	System.out.println(result);
 	return result;
 
     }
