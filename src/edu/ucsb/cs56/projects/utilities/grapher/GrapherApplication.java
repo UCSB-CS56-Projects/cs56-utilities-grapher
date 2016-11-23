@@ -235,7 +235,7 @@ public class GrapherApplication {
 			     fnsdd.add(new FunctionR1R1DisplayData(new CustomFunction(userInput), Color.CYAN));
 			     inputedValidFunction=true;
 			  }else{
-			    	    arbiDialog.addSyntaxError();
+			    	    quadDialog.addSyntaxError();
 		  	  }
 		   	  graphPanel.refresh();// Update the table
 		  	  functionsPanel.displayNewRow();
