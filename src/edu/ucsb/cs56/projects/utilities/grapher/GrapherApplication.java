@@ -226,12 +226,22 @@ public class GrapherApplication {
 		}
 	});
 	customQuad.addActionListener(s->{
-		// If the user has clicked 'OK' on the pop up dialog
-		if(quadDialog.display() == true){
-		    // Use the user input to create new function, add to list, and refresh
-		    fnsdd.add(new FunctionR1R1DisplayData(quadDialog.inputCoeffs(), Color.CYAN));
-		    graphPanel.refresh();// Update the table
-		    functionsPanel.displayNewRow();
+		boolean inputedValidFunction=false;
+		while(!inputedValidFunction){
+			// If the user has clicked 'OK' on the pop up dialog
+			if(quadDialog.display() == true){
+			  String userInput=quadDialog.getText();
+			  if(CustomFunction.isValidFunction(userInput)){
+			     fnsdd.add(new FunctionR1R1DisplayData(new CustomFunction(userInput), Color.CYAN));
+			     inputedValidFunction=true;
+			  }else{
+			    	    arbiDialog.addSyntaxError();
+		  	  }
+		   	  graphPanel.refresh();// Update the table
+		  	  functionsPanel.displayNewRow();
+			}else{
+			     inputedValidFunction=true;
+			}
 		}
 	});
 	arbiFunc.addActionListener(s->{

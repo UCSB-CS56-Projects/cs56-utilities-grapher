@@ -15,13 +15,13 @@ import java.awt.event.*;
 
 public class CustomQuadraticDialog {
     private JTextField[] textFields;
-
+    private JLabel syntaxError;
     /** 
 	Construct from the desired length of polynomial
 	@param length is the desired length of the polynomial
     */
     public CustomQuadraticDialog(int length) {
-
+	syntaxError=new JLabel("");
 	// Fill with text fields for user input
 	textFields = new JTextField[length];
 	for(int i = 0; i<length; i++){
@@ -37,7 +37,6 @@ public class CustomQuadraticDialog {
 
 	// Create the panel
 	JPanel panel = new JPanel(new GridLayout(0,1));
-
 	// Show labels and text fields (x^i from largest power to 0)
 	for(int i = (textFields.length)-1; i>=0; i--){
 	    // x^i
@@ -46,7 +45,7 @@ public class CustomQuadraticDialog {
 	    // Text placed from lowest to highest
 	    panel.add(textFields[i]);
 	}
-
+	panel.add(syntaxError);
 	// Reaction to button pressing
 	int result = JOptionPane.showConfirmDialog(null,
 						   panel,
@@ -65,12 +64,35 @@ public class CustomQuadraticDialog {
      */
     public CustomQuadraticFunction inputCoeffs(){
 	int[] intFields = new int[textFields.length];
-
 	// Convert to integer values
 	for(int i = 0; i<textFields.length; i++){
 	    intFields[i] = java.lang.Integer.parseInt(textFields[i].getText());
 	}
 
         return(new CustomQuadraticFunction(intFields));
+    }
+    public String getText(){
+	String result="";
+	for(int i=textFields.length-1;i>=0;i--){
+	    if(textFields[i].getText().equals("0"))continue;
+	    result+=textFields[i].getText();
+	    result+=" ";
+	    if(i!=0){
+		result+="x";
+		if(i!=1){
+		    result+=" ^ ";
+		    result+=i;
+		}
+	    }
+	    if(i>0){
+		result+=" + ";
+	    }
+	}
+	if(result.equals(""))result="0";
+	return result;
+
+    }
+    public void addSyntaxError(){
+	syntaxError.setText("Syntax Error");
     }
 }
