@@ -19,7 +19,7 @@ public class Graph2DPanel extends JPanel implements ActionListener {
 
     private Color background = Color.BLACK;
     private Color foreground = Color.WHITE;
-    
+   
     // Used to only redraw the graph if necessary.
     private boolean graphIsValid = false;
     // A path of the graph that can be drawn
@@ -106,8 +106,8 @@ public class Graph2DPanel extends JPanel implements ActionListener {
 	g.drawLine(0, (int)(height / 2)+ (int)bounds.getYMin(), (int)width, (int)(height / 2)+(int)bounds.getYMin());
 	
 	// Draw the y axis
-	//int xScale = (int)(width / (bounds.getXMax() - bounds.getXMin()));
-	//g.drawLine(-1*(int)bounds.getXMin()*(int)xScale, 0, -1*(int)bounds.getXMin()*(int)xScale, (int)height);
+//	int xScale = (int)(width / (bounds.getXMax() - bounds.getXMin()));
+//	g.drawLine((int)(width/2)+(int)bounds.getXMin(), 0, (int)(width/2)+(int)bounds.getXMin(), (int)height);
 
      }
     
@@ -141,8 +141,9 @@ public class Graph2DPanel extends JPanel implements ActionListener {
         private boolean controlHeld = false;
 
         public void mouseDragged(MouseEvent e) {
-          if(e.getButton() == MouseEvent.BUTTON1)
-	  {
+	    
+  //        if(e.getButton() == MouseEvent.BUTTON1)
+//	  {
             if (prevY == -1) {
                 prevX = e.getX();
                 prevY = e.getY();
@@ -154,7 +155,7 @@ public class Graph2DPanel extends JPanel implements ActionListener {
                 bounds.translate(deltaX, deltaY);
                 prevX = e.getX(); prevY = e.getY();
             }
-	   }
+//	   }
         }
 	
 	/**
@@ -163,22 +164,23 @@ public class Graph2DPanel extends JPanel implements ActionListener {
         public void mousePressed(MouseEvent e) {
 		
 	    //Sets values of prevX and prevY for use with the mouseDragged method if left mouse key is pressed
-            if(e.getButton() == MouseEvent.BUTTON1)
+//            if(e.getButton() == MouseEvent.BUTTON1)
 		prevX = e.getX(); prevY = e.getY();
 
 	    // AB, HW Centers and zooms in on point of the graph clicked with a right mouse click
-	    if(e.getButton() == MouseEvent.BUTTON3)
-	    {
-		float width=(float)getSize().getWidth();
-		float height=(float)getSize().getHeight();
-		float newCenterX=bounds.getXMin()+(((float)e.getX())/width)*(bounds.getXMax()-bounds.getXMin());
-		float newCenterY=bounds.getYMin()+(((float)e.getY())/height)*(bounds.getYMax()-bounds.getYMin());
-		float centerX=(bounds.getXMin()+bounds.getXMax())/2.0f;
-		float centerY=(bounds.getYMin()+bounds.getYMax())/2.0f;
-		bounds.translate(newCenterX-centerX,newCenterY-centerY);
-		bounds.scale(SCALE_FACTOR_ON_RIGHT_CLICK);
-	    }
+//	    if(e.getButton() == MouseEvent.BUTTON3)
+//	    {
+//		float width=(float)getSize().getWidth();
+//		float height=(float)getSize().getHeight();
+//		float newCenterX=bounds.getXMin()+(((float)e.getX())/width)*(bounds.getXMax()-bounds.getXMin());
+//		float newCenterY=bounds.getYMin()+(((float)e.getY())/height)*(bounds.getYMax()-bounds.getYMin());
+//		float centerX=(bounds.getXMin()+bounds.getXMax())/2.0f;
+//		float centerY=(bounds.getYMin()+bounds.getYMax())/2.0f;
+//		bounds.translate(newCenterX-centerX,newCenterY-centerY);
+//		bounds.scale(SCALE_FACTOR_ON_RIGHT_CLICK);
+//	    }
         }
+
 	    
 	/**
 		HW, AB Causes graph to zoom in and out when mouse wheel is scrolled.
@@ -193,6 +195,7 @@ public class Graph2DPanel extends JPanel implements ActionListener {
                 bounds.scale(finalScaleFactor);
 
         }
+
 
     }
 

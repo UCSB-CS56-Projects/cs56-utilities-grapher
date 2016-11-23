@@ -3,7 +3,10 @@ import java.util.ArrayList;
 import java.awt.event.*;
 
 /**
-   A class reprenting a rectangular boundary.
+   A class reprenting a rectangular boundary. This boundary is the boundary of the screen displayed by the GUI.
+   @author Hanqing Wang
+   @author Alexander Bauer
+   @version CS56, F16
    @author Ryan Halbrook
    @version CS56, S13, Project
  */
@@ -42,7 +45,6 @@ public class Bounds2DFloat {
         xMax+=translationFactor*(width);
         yMin-=translationFactor*(height);
         yMax+=translationFactor*(height);
-
 	sendEvents();
     }
 
