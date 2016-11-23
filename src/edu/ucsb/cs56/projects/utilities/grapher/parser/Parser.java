@@ -9,29 +9,32 @@ public class Parser{
 		throw new ParenthesesException();
 	    if(input.get(0)instanceof MinusToken)
 		input.add(0,new NumberToken(0));
+
+	    for(int i=1;i<input.size();i++){//checks for obvious errors and makes text a little easier to parse
+		Token t=input.get(i);
+		Token p=input.get(i-1);
+		if(t instanceof ErrorToken)throw new ParserErrorException();
+	    	if(t instanceof Binop && p instanceof Binop)throw new ParserErrorException();
+		if(t instanceof NumberToken && p instanceof NumberToken)throw new ParserErrorException();
+		boolean tIsLiteral=(t instanceof NumberToken || t instanceof Variable || t instanceof Constant);
+		boolean pIsLiteral=(p instanceof NumberToken || p instanceof Variable || p instanceof Constant);
+		if(tIsLiteral && pIsLiteral)
+			input.add(i,new TimesToken());
+		if (t instanceof LParenToken && pIsLiteral)
+			input.add(i,new TimesToken());
+		if (t instanceof Trig && pIsLiteral)
+			input.add(i,new TimesToken());
+		if ((t instanceof LParenToken) && p instanceof RParenToken)
+			input.add(i,new TimesToken());
+		if ((t instanceof Trig) && p instanceof RParenToken)
+			input.add(i,new TimesToken());
+		if ( tIsLiteral && p instanceof RParenToken)
+			input.add(i,new TimesToken());
+	    }
 	    for(int i=0;i<input.size();i++){
 		Token t=input.get(i);
-		if(t instanceof ErrorToken)throw new ParserErrorException();
-	    	if(i>0&& (t instanceof Binop)&& (input.get(i-1) instanceof Binop))throw new ParserErrorException();
-		if(i>0&&(t instanceof NumberToken)&&(input.get(i-1) instanceof NumberToken))throw new ParserErrorException();
-	    }
-	    for(int i=1;i<input.size();i++){
-	    	if (input.get(i) instanceof NumberToken && input.get(i-1) instanceof Variable)
-			input.add(i,new TimesToken());
-		if (input.get(i) instanceof Variable && input.get(i-1) instanceof NumberToken)
-			input.add(i,new TimesToken());
-		if (input.get(i) instanceof Variable && input.get(i-1) instanceof Variable)
-			input.add(i,new TimesToken());
-		if (input.get(i) instanceof LParenToken && (input.get(i-1) instanceof Variable || input.get(i-1) instanceof NumberToken))
-			input.add(i,new TimesToken());
-		if (input.get(i) instanceof Trig && (input.get(i-1) instanceof Variable || input.get(i-1) instanceof NumberToken))
-			input.add(i,new TimesToken());
-		if ((input.get(i) instanceof LParenToken) && input.get(i-1) instanceof RParenToken)
-			input.add(i,new TimesToken());
-		if ((input.get(i) instanceof Trig) && input.get(i-1) instanceof RParenToken)
-			input.add(i,new TimesToken());
-		if ((input.get(i) instanceof NumberToken || input.get(i) instanceof Variable)&& input.get(i-1) instanceof RParenToken)
-			input.add(i,new TimesToken());		
+		if(t instanceof Constant)
+			input.set(i, new NumberToken(((Constant)t).getValue()));
 	    }
 	        int parenCheck = 0;
 		ArrayList<Integer>lParenIndices=new ArrayList<Integer>();

@@ -72,6 +72,7 @@ public class Tokenizer{
 	    stateChars.add(new YVarToken());
 	    stateChars.add(new TVarToken());
 	    stateChars.add(new PIToken());
+	    stateChars.add(new EToken());
 	}
 
 	/**
