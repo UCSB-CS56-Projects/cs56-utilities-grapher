@@ -14,13 +14,13 @@ public class Tokenizer{
 	private State[]states=new State[NUMBER_OF_STATES];
 	private ArrayList<Token>stateChars=new ArrayList<Token>();
 	private int indexOfNextEmptyState=0;
-
+	private static Tokenizer singleton;
 	/**
 		Constructor for Tokenizer class
 		Sets up finite state automata and adds necessary states to the
 		grammar
 	*/
-	public Tokenizer(){
+	protected Tokenizer(){
 	    addStaticTokens();
 	    addState(new State(null,false));//default state zero
 	    State lastState=null;
@@ -47,7 +47,9 @@ public class Tokenizer{
 	    }
 	    addNumberStates();
 	}
-
+	public static void createTokenizerIfNull(){
+		if(singleton==null)singleton=new Tokenizer();
+	}
 	/**
 		Adds instances of defined tokens to the list of finite 
 		state automata so that the tokenizer will be able to recognize
@@ -69,6 +71,7 @@ public class Tokenizer{
 	    stateChars.add(new XVarToken());
 	    stateChars.add(new YVarToken());
 	    stateChars.add(new TVarToken());
+	    stateChars.add(new PIToken());
 	}
 
 	/**
@@ -93,12 +96,15 @@ public class Tokenizer{
 	    leadingPeriod.addNextState(numbersAfterDecimalPoint, indexOfNextEmptyState-1);
 	    addState(leadingPeriod);
 	}
-
+	public static ArrayList<Token> tokenize(String input){
+		createTokenizerIfNull();
+		return singleton.createTokens(input);
+	}
 	/**
 		Creates an array list of tokens that the parser can use to
 		make an AST
 	*/
-	public ArrayList<Token> tokenize(String input){
+	public ArrayList<Token> createTokens(String input){
 	    ArrayList<Token>tokens=new ArrayList<Token>();
 	    State currentState=getDefaultState();
 	    int endIndexOfLastToken=-1;

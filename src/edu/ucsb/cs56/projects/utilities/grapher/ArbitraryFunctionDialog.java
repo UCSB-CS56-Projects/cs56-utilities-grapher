@@ -15,13 +15,13 @@ import java.awt.event.*;
 
 public class ArbitraryFunctionDialog {
     private JTextField textField;
-
+    private JLabel syntaxError;
     /** 
 	Construct from the desired length of polynomial
 	@param length is the desired length of the polynomial
     */
     public ArbitraryFunctionDialog() {
-
+	syntaxError=new JLabel("");
 	// Fill with text field for user input
 	textField = new JTextField("0");
 
@@ -37,7 +37,7 @@ public class ArbitraryFunctionDialog {
 
 	// Show labels and text fields
 	panel.add(new JLabel("Input function:"));
-	panel.add(new JLabel("Note: do not use paranthesis other than for cos(x) and sin(x). Cosine and Sine can also only take singular x (cos(2x) or sin(1) not allowed)."));
+	panel.add(syntaxError);
 	panel.add(textField);
 
 	// Reaction to button pressing
@@ -52,15 +52,8 @@ public class ArbitraryFunctionDialog {
 	else
 	    return false;
     }
-
-    /** 
-	Creates a new arbitrary function from the text field of the widget and returns it
-     */
-    public ArbitraryFunction inputFunction(){
-	// Return new function using textfield text
-	String input = textField.getText();
-
-        return(new ArbitraryFunction(input, 'x'));
+    public void addSyntaxError(){
+	syntaxError.setText("Syntax Error");
     }
     public String getText(){
 	return textField.getText();

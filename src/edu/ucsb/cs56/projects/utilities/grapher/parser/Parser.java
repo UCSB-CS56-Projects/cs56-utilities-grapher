@@ -20,11 +20,15 @@ public class Parser{
 			input.add(i,new TimesToken());
 		if (input.get(i) instanceof Variable && input.get(i-1) instanceof NumberToken)
 			input.add(i,new TimesToken());
+		if (input.get(i) instanceof Variable && input.get(i-1) instanceof Variable)
+			input.add(i,new TimesToken());
 		if (input.get(i) instanceof LParenToken && (input.get(i-1) instanceof Variable || input.get(i-1) instanceof NumberToken))
 			input.add(i,new TimesToken());
 		if (input.get(i) instanceof Trig && (input.get(i-1) instanceof Variable || input.get(i-1) instanceof NumberToken))
 			input.add(i,new TimesToken());
-		if (input.get(i) instanceof RParenToken && input.get(i-1) instanceof LParenToken)
+		if ((input.get(i) instanceof LParenToken) && input.get(i-1) instanceof RParenToken)
+			input.add(i,new TimesToken());
+		if ((input.get(i) instanceof Trig) && input.get(i-1) instanceof RParenToken)
 			input.add(i,new TimesToken());
 		if ((input.get(i) instanceof NumberToken || input.get(i) instanceof Variable)&& input.get(i-1) instanceof RParenToken)
 			input.add(i,new TimesToken());		

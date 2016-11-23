@@ -49,12 +49,9 @@ public class FunctionR1R1DisplayData {
 	ptsCount++;
 	gp.moveTo(pX, pY+bounds.getYMin());
 	for (float i = 0; i < lastX; i+=(1 / xScale)) {
+	    if(!function.isInDomain(i+bounds.getXMin()))continue;//if function is out of bounds don't display
 	    pX = i * xScale;
-	    try{
-		pY =  -(function.evaluate(i+bounds.getXMin()) * yScale);
-	    }catch(Exception e){
-		    continue;
-	    }
+	    pY =  -(function.evaluate(i+bounds.getXMin()) * yScale);
 	    ptsCount++;
 	    gp.lineTo(pX, pY+bounds.getYMin());
 	}

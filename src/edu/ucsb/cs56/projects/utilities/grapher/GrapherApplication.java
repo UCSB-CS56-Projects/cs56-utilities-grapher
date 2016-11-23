@@ -236,11 +236,22 @@ public class GrapherApplication {
 	});
 	arbiFunc.addActionListener(s->{
 				// If the user has clicked 'OK' on the pop up dialog
-		if(arbiDialog.display() == true){
-		    // Use user input to create new function, add to list, and refresh
-		    fnsdd.add(new FunctionR1R1DisplayData(new CustomFunction(arbiDialog.getText()), Color.RED));
-		    graphPanel.refresh(); // Update the table
-		    functionsPanel.displayNewRow();
+		boolean inputedValidFunction=false;
+		while(!inputedValidFunction){
+			if(arbiDialog.display() == true){
+			    // Use user input to create new function, add to list, and refresh
+			        String userInput=arbiDialog.getText();
+    		 	  	if(CustomFunction.isValidFunction(userInput)){
+				   fnsdd.add(new FunctionR1R1DisplayData(new CustomFunction(userInput), Color.RED));
+			   	   inputedValidFunction=true;
+				}else{
+			    	    arbiDialog.addSyntaxError();
+		    		}
+		   		graphPanel.refresh(); // Update the table
+		    		functionsPanel.displayNewRow();
+			}else{
+				inputedValidFunction=true;//user clicked cancel, exit loop
+			}
 		}
 	});
 	// Add buttons to the functions options

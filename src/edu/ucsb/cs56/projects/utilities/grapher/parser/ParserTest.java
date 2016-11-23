@@ -1,4 +1,5 @@
 package edu.ucsb.cs56.projects.utilities.grapher.parser;
+
 import edu.ucsb.cs56.projects.utilities.grapher.tokenizer.*;
 
 //import edu.ucsb.cs56.projects.utilities.grapher.tokenizer;
@@ -10,32 +11,22 @@ import java.util.ArrayList;
 import org.junit.Before;
 
 public class ParserTest {
-    Parser p;
-    Tokenizer t;
-
-    @Before
-    public void setUp(){
-	p=new Parser();
-	t = new Tokenizer();
-    }
     @Test
     public void testWhiteSpaceOperators(){
-	ArrayList<Token>tt=t.tokenize("5    sin 34 x");
-	System.out.println(tt);
+	ArrayList<Token>tt=Tokenizer.tokenize("5    sin 34 x");
 	TokenNode z = null;
 	try{
-		z = p.parse(tt);
+		z = Parser.parse(tt);
 	}catch(Exception e){
+	    assertEquals(0,1);//if there's an exception, fail test
 	}
 	z.printNode();
-	
     }
     @Test
     public void testWhiteSpaceNumbers(){
-	ArrayList<Token>tt=t.tokenize("3 5");
-	System.out.println(tt);
+	ArrayList<Token>tt=Tokenizer.tokenize("3 5");
 	try{
-		p.parse(tt);
+		Parser.parse(tt);
 		assertEquals(1,0);//must give exception or test fails
 	}catch(Exception e){
 	}
@@ -67,9 +58,9 @@ public class ParserTest {
 	TokenNode c=new TokenNode(new PlusToken(),new TokenNode(new NumberToken(1)),new TokenNode(new NumberToken(2)));
 	TokenNode z=null;
 	try{
-		z=p.parse(tokens);
+		z=Parser.parse(tokens);
 	}catch(Exception e){
-		System.out.println("hi");
+		assertEquals(0,1);
 	}
 	z.printNode();
 
@@ -77,16 +68,15 @@ public class ParserTest {
     }
     @Test
     public void testParserNotSoSimple(){
-	ArrayList<Token> tokens = t.tokenize("5*6+sinx");
-	System.out.println(tokens);
+	ArrayList<Token> tokens = Tokenizer.tokenize("5*6+sinx");
 	TokenNode z=null;
 	TokenNode sT=new TokenNode(new SineToken(),new TokenNode(new XVarToken()));
 	TokenNode tT=new TokenNode(new TimesToken(),new TokenNode(new NumberToken(5)),new TokenNode(new NumberToken(6)));
 	TokenNode pT=new TokenNode(new PlusToken(),tT,sT);
 	try{
-		z=p.parse(tokens);
+		z=Parser.parse(tokens);
 	}catch(Exception e){
-		System.out.println("hi");
+		assertEquals(0,1);
 	}
 //	System.out.println("ahjgklnhsalksld");
 	assertEquals(pT,z);
@@ -94,37 +84,35 @@ public class ParserTest {
     }
     @Test
 	public void testParserNotSoSimple2(){
-        ArrayList<Token> tokens = t.tokenize("2+3-2");
-        System.out.println(tokens);
+        ArrayList<Token> tokens = Tokenizer.tokenize("2+3-2");
         TokenNode z=null;
         try{
-	    z=p.parse(tokens);
+	    z=Parser.parse(tokens);
         }catch(Exception e){
-	    System.out.println("hi");
+		assertEquals(0,1);
         }
   //      z.printNode();
     }
     @Test
 	public void testParserNotSoSimple3(){
-        ArrayList<Token> tokens = t.tokenize("2-3+2");
-        System.out.println(tokens);
+        ArrayList<Token> tokens = Tokenizer.tokenize("2-3+2");
         TokenNode z=null;
         try{
-	    z=p.parse(tokens);
+	    z=Parser.parse(tokens);
         }catch(Exception e){
-	    System.out.println("hi");
+	    assertEquals(0,1);
         }
 //        z.printNode();
     }
     @Test
         public void testParserNotSoSimple4(){
-	ArrayList<Token> tokens = t.tokenize("3*4/5*6");
+	ArrayList<Token> tokens = Tokenizer.tokenize("3*4/5*6");
 	System.out.println(tokens);
 	TokenNode z=null;
         try{
-	    z=p.parse(tokens);
+	    z=Parser.parse(tokens);
 	}catch(Exception e){
-            System.out.println("hi");
+	    assertEquals(0,1);
 	}
   //      z.printNode();
     }

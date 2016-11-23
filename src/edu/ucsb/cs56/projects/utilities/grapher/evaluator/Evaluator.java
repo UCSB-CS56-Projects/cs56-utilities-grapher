@@ -4,7 +4,8 @@ import edu.ucsb.cs56.projects.utilities.grapher.parser.TokenNode;
 import edu.ucsb.cs56.projects.utilities.grapher.tokenizer.*;
 import java.lang.Math;
 public class Evaluator{
-	public static double evaluate(TokenNode root,double num) throws EvaluatorException, DomainException{
+	public static double evaluate(TokenNode root,double num) throws SyntaxException, DomainException{
+		if(root==null)throw new SyntaxException();
 		Token t=root.getData();
 		if(root.isLiteral()){
 			if(t instanceof NumberToken){
@@ -12,7 +13,7 @@ public class Evaluator{
 			}else if(t instanceof Variable){
 				return num;
 			}else
-				throw new EvaluatorException();
+				throw new SyntaxException();
 
 		}else if(root.isUnaryOperator()){
 			if(t instanceof MinusToken){
@@ -35,7 +36,7 @@ public class Evaluator{
 				if(dd==0)throw new DomainException();
 				return Math.log(dd);
 			}else
-				throw new EvaluatorException();
+				throw new SyntaxException();
 		}else{
 			if(t instanceof ExponentToken){
 				return Math.pow(evaluate(root.getLeftChild(),num),evaluate(root.getRightChild(),num));
@@ -50,7 +51,7 @@ public class Evaluator{
 				if(denom==0)throw new DomainException();
 				return evaluate(root.getLeftChild(),num)/denom;
 			}else
-				throw new EvaluatorException();
+				throw new SyntaxException();
 		}
 	}
 
