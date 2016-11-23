@@ -73,8 +73,16 @@ public class CustomQuadraticDialog {
     }
     public String getText(){
 	String result="";
+	int lastNonZeroTerm=0;
+	for(int i=0;i<textFields.length;i++){
+		if(!(textFields[i].getText().equals("0")||textFields[i].getText().equals(""))){
+			lastNonZeroTerm=i;
+			break;
+		}
+	}
 	for(int i=textFields.length-1;i>=0;i--){
-	    if(textFields[i].getText().equals("0"))continue;
+	    if(textFields[i].getText().equals("0")||textFields[i].getText().equals(""))continue;
+	    result+="(";
 	    result+=textFields[i].getText();
 	    result+=" ";
 	    if(i!=0){
@@ -84,11 +92,14 @@ public class CustomQuadraticDialog {
 		    result+=i;
 		}
 	    }
-	    if(i>0){
+	    result+=")";
+	    if(i>lastNonZeroTerm){
 		result+=" + ";
-	    }
+	    }else
+		break;
 	}
 	if(result.equals(""))result="0";
+	System.out.println(result);
 	return result;
 
     }
