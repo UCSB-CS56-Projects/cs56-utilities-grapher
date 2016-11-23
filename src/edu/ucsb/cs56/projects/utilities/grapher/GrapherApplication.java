@@ -191,7 +191,7 @@ public class GrapherApplication {
 
 	cosine.addActionListener(s->{
 		// If the functon already exists, do not add it
-		FunctionR1R1DisplayData cosineFunction = new FunctionR1R1DisplayData(new CosineFunction(), Color.GREEN);
+		FunctionR1R1DisplayData cosineFunction = new FunctionR1R1DisplayData(new CustomFunction("cos(x)"), Color.GREEN);
 		if(fnsdd != null){
 		    if(fnsdd.contains(cosineFunction)==false){
 			// Add the function to the list and refresh
@@ -203,7 +203,7 @@ public class GrapherApplication {
 	});
 	sine.addActionListener(s->{
 		// If the functon already exists, do not add it
-		FunctionR1R1DisplayData sineFunction = new FunctionR1R1DisplayData(new SineFunction(), Color.BLUE);
+		FunctionR1R1DisplayData sineFunction = new FunctionR1R1DisplayData(new CustomFunction("sin(x)"), Color.BLUE);
 		if(fnsdd != null){
 		    if(fnsdd.contains(sineFunction)==false){
 			// Add the function to the list and refresh
@@ -215,7 +215,7 @@ public class GrapherApplication {
 	});
 	quadratic.addActionListener(s->{
 		// If the functon already exists, do not add it
-		FunctionR1R1DisplayData quadFunction = new FunctionR1R1DisplayData(new QuadraticFunction(), Color.RED);
+		FunctionR1R1DisplayData quadFunction = new FunctionR1R1DisplayData(new CustomFunction("x ^ 2"), Color.YELLOW);
 		if(fnsdd != null){
 		    if(fnsdd.contains(quadFunction)==false){
 			// Add the function to the list and refresh
