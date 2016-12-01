@@ -1,10 +1,11 @@
 cs56-utilities-grapher
 ======================
-(F16) Hi future cS56 students,<br/>
+F16 Hi future cS56 students,<br/>
 this project is a software that let's you graph functions, for example,<br/>
 `f(x)=3x+4;`<br/>
 
-The GrapherApplication class is the main class and contains the JFrame of the GUI.
+Here is a brief description of the useful classes:<br/>
+The GrapherApplication class is the main class and contains the JFrame of the GUI.<br/>
 
 The FunctionsPanel class is the JPanel on the left side,<br/>
 The Graph2DPanel is the center JPanel, and the Grapher2DBoundsPanel is the right JPanel.<br/>
@@ -34,6 +35,23 @@ Example functions you can input:<br/>
 `PIePIePIePIe //which will be interpreted as PI*e*PI*e*PI*e*PI*e` <br/>
 `x^3loglnPI`<br/>
 
+**Features to add and bugs**<br/>
+Correctly working y axis.<br/>
+More functions: floor, ceil, abs, cosh, sinh, derivatives, integrals<br/>
+More function formats: polar, parametric, multivariable<br/>
+Saving graphs<br/>
+Prettier GUI<br/>
+Log/ln functions sometimes don't graph right<br/>
+
+**Opportunities to refactor:**<br/>
+Right now, the parser could use some refactoring:<br/>
+To add a basic function or operator right now, you have to make a token class, add one line of code to tokenizer, and change evaluator slightly.<br/>
+Ideally, we shouldn't have to change the evaluator at all.<br/>
+Parser could use a lot of refactoring...but try not to touch the Parser.parse method unless you really know what you're doing.<br/>
+Some classes, such as QuadraticFunction are obsolete and could probably be deleted.<br/>
+
+Good luck,<br/>
+Henry Wang and Alexander Bauer
 
 (W15) TBD: Good project but it needs more issues for students to work on. But most of the issues I can think of (such as adding parenthesis evaluation for arbitrary expressions) are difficult beyond the scope of a CS 56 project. (David Coffill)
 
