@@ -2,6 +2,15 @@ package edu.ucsb.cs56.projects.utilities.grapher.parser;
 
 import edu.ucsb.cs56.projects.utilities.grapher.tokenizer.*;
 import java.util.ArrayList;
+/**
+   This class sucks. -The people who wrote this class
+   NOTES: We treat all TokenNode objects as literals, the same way as NumberTokens
+   The algorithm for this is:
+       1. We evaluate the stuff inside parentheses first, recursively
+       2. We take the token with the highest Operator Precedence and turns it and relevant neighboring tokens into a mini AST: TokenNode
+          If there's a tie, we take the leftmost one if the token has associativity left, and the rightmost one if the token has associativity right.
+       3. Repeat until we have only a single TokenNode: one that contains everything.
+*/
 public class Parser{
 
 	public static TokenNode parse(ArrayList<Token> input) throws Exception{
@@ -37,7 +46,7 @@ public class Parser{
 			input.set(i, new NumberToken(((Constant)t).getValue()));
 	    }
 	        int parenCheck = 0;
-		ArrayList<Integer>lParenIndices=new ArrayList<Integer>();
+		ArrayList<Integer>lParenIndices=new ArrayList<Integer>();//THIS CHECKS FOR ASSOCIATIVITY LEFT OR RIGHT
 		ArrayList<Integer>rParenIndices=new ArrayList<Integer>();
 		for ( int i = 0; i < input.size(); i ++){
 			if (input.get(i) instanceof LParenToken){
@@ -59,7 +68,7 @@ public class Parser{
 			rParenIndices.add(input.size()-1);
 		}
 
-		for(int i=lParenIndices.size()-1;i>=0;i--){
+		for(int i=lParenIndices.size()-1;i>=0;i--){//RECURSIVE PARSING OF STUFF INSIDE PARENTHESES
 			if(rParenIndices.get(i)-lParenIndices.get(i)>1){
 				TokenNode ast=parse(getPortionOfArray(input,lParenIndices.get(i)+1,rParenIndices.get(i)-1));
 				input=replacePortionOfArray(input,ast,lParenIndices.get(i),rParenIndices.get(i));
