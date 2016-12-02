@@ -43,6 +43,22 @@ Saving graphs<br/>
 Prettier GUI<br/>
 Log/ln functions sometimes don't graph right<br/>
 
+**Existing Issues**<br/>
+https://github.com/UCSB-CS56-Projects/cs56-utilities-grapher/issues/5<br/>
+https://github.com/UCSB-CS56-Projects/cs56-utilities-grapher/issues/8<br/>
+https://github.com/UCSB-CS56-Projects/cs56-utilities-grapher/issues/12<br/>
+https://github.com/UCSB-CS56-Projects/cs56-utilities-grapher/issues/16<br/>
+https://github.com/UCSB-CS56-Projects/cs56-utilities-grapher/issues/18<br/>
+https://github.com/UCSB-CS56-Projects/cs56-utilities-grapher/issues/19<br/>
+https://github.com/UCSB-CS56-Projects/cs56-utilities-grapher/issues/24<br/>
+https://github.com/UCSB-CS56-Projects/cs56-utilities-grapher/issues/25<br/>
+https://github.com/UCSB-CS56-Projects/cs56-utilities-grapher/issues/26<br/>
+https://github.com/UCSB-CS56-Projects/cs56-utilities-grapher/issues/27<br/>
+https://github.com/UCSB-CS56-Projects/cs56-utilities-grapher/issues/28<br/>
+<br/>
+There currently exists above 2000 points worth of issues some simple, and some harder.<br/>
+<br/>
+
 **Opportunities to refactor:**<br/>
 Right now, the parser could use some refactoring:<br/>
 To add a basic function or operator right now, you have to make a token class, add one line of code to tokenizer, and change evaluator slightly.<br/>
