@@ -35,6 +35,13 @@ Example functions you can input:<br/>
 `PIePIePIePIe //which will be interpreted as PI*e*PI*e*PI*e*PI*e` <br/>
 `x^3loglnPI`<br/>
 
+**Build Instructions**<br/>
+Build: `ant compile`<br/>
+Build & Run: `ant run`<br/>
+Javadoc: `ant javadoc`<br/>
+Test: `ant test`<br/>
+Clean: `ant clean`<br/>
+
 **Features to add and bugs**<br/>
 Correctly working y axis.<br/>
 More functions: floor, ceil, abs, cosh, sinh, derivatives, integrals<br/>
